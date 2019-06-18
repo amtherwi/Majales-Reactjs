@@ -11,6 +11,13 @@ const navigationConfig = [
                 'type' : 'item',
                 'icon' : 'whatshot',
                 'url'  : '/example'
+            },
+            {
+                'id'   : 'example2-component',
+                'title': 'Example2',
+                'type' : 'item',
+                'icon' : 'accessible',
+                'url'  : '/example2'
             }
         ]
     }

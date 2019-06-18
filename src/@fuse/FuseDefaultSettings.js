@@ -39,6 +39,7 @@ export function getParsedQuerySettings()
  * THEME DEFAULTS
  */
 export const defaultThemeOptions = {
+    direction: "rtl",
     typography: {
         fontFamily                 : [
             'Muli',

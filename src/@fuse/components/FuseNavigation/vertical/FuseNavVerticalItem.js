@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
         height                     : 40,
         width                      : 'calc(100% - 16px)',
         borderRadius               : '0 20px 20px 0',
-        paddingRight               : 12,
+        paddingLeft               : 12,
         '&.active'                 : {
             backgroundColor            : theme.palette.secondary.main,
             color                      : theme.palette.secondary.contrastText + '!important',

@@ -9,11 +9,12 @@ import store from './store';
 import AppContext from './AppContext';
 import routes from './fuse-configs/routesConfig';
 import {create} from 'jss';
+import rtl from 'jss-rtl';
 import {StylesProvider, jssPreset, createGenerateClassName} from '@material-ui/styles';
 
 const jss = create({
     ...jssPreset(),
-    plugins       : [...jssPreset().plugins, jssExtend()],
+    plugins       : [...jssPreset().plugins, jssExtend(), rtl()],
     insertionPoint: document.getElementById('jss-insertion-point'),
 });
 

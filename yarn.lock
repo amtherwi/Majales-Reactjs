@@ -6927,6 +6927,13 @@ jss-plugin-vendor-prefixer@^10.0.0-alpha.16:
     css-vendor "^2.0.1"
     jss "10.0.0-alpha.16"
 
+jss-rtl@^0.2.3:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/jss-rtl/-/jss-rtl-0.2.3.tgz#fe76010d7d1041ca9d61e0011fa71d344ba0b696"
+  integrity sha512-c9yOhTWldABdx+dds0XSXIbUcEWajBv+e7fl3zaiHCwOqbq4QiAdDTw7l4l5nqHAaGV6+33zMoS//KMMGpPA1A==
+  dependencies:
+    rtl-css-js "^1.8.0"
+
 jss@10.0.0-alpha.16, jss@^10.0.0-alpha.16:
   version "10.0.0-alpha.16"
   resolved "https://registry.yarnpkg.com/jss/-/jss-10.0.0-alpha.16.tgz#0555e8b667e08dbd2cc94f6125be5a8b8b022833"
@@ -10315,6 +10322,13 @@ rsvp@^4.8.4:
   resolved "https://registry.yarnpkg.com/rsvp/-/rsvp-4.8.4.tgz#b50e6b34583f3dd89329a2f23a8a2be072845911"
   integrity sha512-6FomvYPfs+Jy9TfXmBpBuMWNH94SgCsZmJKcanySzgNNP6LjWxBvyLTa9KaMfDDM5oxRfrKDB0r/qeRsLwnBfA==
 
+rtl-css-js@^1.8.0:
+  version "1.13.0"
+  resolved "https://registry.yarnpkg.com/rtl-css-js/-/rtl-css-js-1.13.0.tgz#e97ebb67dd9fc6c4be1278730901967fc432ed9f"
+  integrity sha512-zUydBqLfSKEk6XF+OiK1fmReAsnoZz0MKIYPsAfP4DZuCdLewtH7nDwXpnqd8jbL7J1pE9uCaOLTkfQGAFfJRw==
+  dependencies:
+    "@babel/runtime" "^7.1.2"
+
 run-async@^2.2.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/run-async/-/run-async-2.3.0.tgz#0371ab4ae0bdd720d4166d7dfda64ff7a445a6c0"
@@ -11088,10 +11102,36 @@ table@^5.2.3:
     slice-ansi "^2.1.0"
     string-width "^3.0.0"
 
-tailwindcss@1.0.2:
+tailwindcss-dir@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/tailwindcss-dir/-/tailwindcss-dir-3.0.2.tgz#366e2e47bec0787d8a86eae59be47406f1056b01"
+  integrity sha512-FgQVnpk+vE9MajcmaCcIxQ02GnUGvsOsEJt+2FgdoYNwRbueVYMkySKBk6xwMRnhzUIwJ6hH9yJVwcWjn1kaOA==
+  dependencies:
+    tailwindcss "^1.0.1"
+
+    tailwindcss@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-1.0.2.tgz#1df9caf88e0b194a5debf3c3b3aa6b64ea92c9a8"
   integrity sha512-zqrWxJo3UlXDSa6KA3v0D9FIMCR8ZtVRxTu68+mwqVwazzxVlXM5Y0j1TM3hjGeScfPpOeV06k7Vs9eY7+eoPA==
+  dependencies:
+    autoprefixer "^9.4.5"
+    bytes "^3.0.0"
+    chalk "^2.4.1"
+    fs-extra "^8.0.0"
+    lodash "^4.17.11"
+    node-emoji "^1.8.1"
+    normalize.css "^8.0.1"
+    postcss "^7.0.11"
+    postcss-functions "^3.0.0"
+    postcss-js "^2.0.0"
+    postcss-nested "^4.1.1"
+    postcss-selector-parser "^6.0.0"
+    pretty-hrtime "^1.0.3"
+
+tailwindcss@^1.0.1:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-1.0.4.tgz#98f186c8142bfb292bcbfcb53b84df369f11ef91"
+  integrity sha512-+1NNPW+U83k6DV/uUOnsfmX86Cfb8N87fiuN0cX0mEi2sZUpglLzZqlXtP8FD9Hlne5H1UhlS8tajz+F9SSxjA==
   dependencies:
     autoprefixer "^9.4.5"
     bytes "^3.0.0"
