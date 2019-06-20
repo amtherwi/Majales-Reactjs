@@ -47,7 +47,7 @@ function FuseNavVerticalItem(props)
     const classes = useStyles(props);
     const {item, nestedLevel, active} = props;
     let paddingValue = 40 + (nestedLevel * 16);
-    const listItemPadding = nestedLevel > 0 ? 'pl-' + (paddingValue > 80 ? 80 : paddingValue) : 'pl-24';
+    const listItemPadding = nestedLevel > 0 ? 'pl-' + (paddingValue > 80 ? 80 : paddingValue) : 'pr-24';
 
     if ( !FuseUtils.hasPermission(item.auth, userRole) )
     {
@@ -65,7 +65,7 @@ function FuseNavVerticalItem(props)
             exact={item.exact}
         >
             {item.icon && (
-                <Icon className="list-item-icon text-16 flex-shrink-0 mr-16" color="action">{item.icon}</Icon>
+                <Icon className="list-item-icon text-16 flex-shrink-0 ml-16" color="action">{item.icon}</Icon>
             )}
             <ListItemText className="list-item-text" primary={item.title} classes={{primary: 'text-14 list-item-text-primary'}}/>
             {item.badge && (
