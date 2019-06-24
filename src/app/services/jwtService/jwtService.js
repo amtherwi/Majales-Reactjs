@@ -89,9 +89,6 @@ class jwtService extends FuseUtils.EventEmitter {
         return new Promise((resolve, reject) => {
             axios.get('http://localhost:21021/api/services/app/Session/GetCurrentLoginInformations')
                 .then(response => {
-                    console.log(response.data.result.user);
-                    console.log('second line ');
-                    console.log(response.data.success);
                     if(response.data.result.user !== null && response.data.success) {
                         console.log('approve');
                       //  this.setSession(this.setSession(localStorage.getItem('jwt_access_token')));
