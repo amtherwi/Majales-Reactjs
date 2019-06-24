@@ -79,7 +79,7 @@ class jwtService extends FuseUtils.EventEmitter {
                 }
                 else
                 {
-                    reject(response.data.result.error);
+                    reject(response.data.error);
                 }
             });
         });
@@ -87,21 +87,20 @@ class jwtService extends FuseUtils.EventEmitter {
 
     signInWithToken = () => {
         return new Promise((resolve, reject) => {
-            axios.get('/api/auth/access-token', {
-                data: {
-                    access_token: this.getAccessToken()
-                }
-            })
+            axios.get('http://localhost:21021/api/services/app/Session/GetCurrentLoginInformations')
                 .then(response => {
-                    if ( response.data.user )
-                    {
-                        this.setSession(response.data.access_token);
-                        resolve(response.data.user);
-                    }
-                    else
+                    console.log(response.data.result.user);
+                    console.log('second line ');
+                    console.log(response.data.success);
+                    if(response.data.result.user !== null && response.data.success) {
+                        console.log('approve');
+                      //  this.setSession(this.setSession(localStorage.getItem('jwt_access_token')));
+                        resolve(response.data.result.user);
+                    }else
                     {
                         reject(response.data.error);
                     }
+
                 });
         });
     };

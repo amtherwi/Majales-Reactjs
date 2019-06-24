@@ -120,7 +120,6 @@ function mapDispatchToProps(dispatch)
 
 function mapStateToProps({auth})
 {
-    console.log(auth);
     return {
         login: auth.login,
         user : auth.user

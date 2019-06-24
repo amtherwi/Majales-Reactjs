@@ -11,7 +11,7 @@ class userService extends FuseUtils.EventEmitter {
                 }
             })
                 .then(response => {
-                    if ( response.data.success === 'true' )
+                    if ( response.data.success)
                     {
                         resolve(response.data.result);
                     }

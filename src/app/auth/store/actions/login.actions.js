@@ -11,10 +11,15 @@ export function submitLogin({email, password})
     return (dispatch) =>
         jwtService.signInWithEmailAndPassword(email, password)
             .then((userId) => {
-
                 userService.getUser(userId)
                     .then((user) => {
-                        dispatch(setUserData(user));
+                       let userobj = {
+                            role    : "admin",
+                            data    : {
+                                'displayName': user.surname,
+                            }
+                        };
+                        dispatch(setUserData(userobj));
 
                         return dispatch({
                             type: LOGIN_SUCCESS

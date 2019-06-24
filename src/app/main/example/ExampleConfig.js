@@ -1,4 +1,5 @@
 import Example from './Example';
+import {authRoles} from 'app/auth';
 
 export const ExampleConfig = {
     settings: {
@@ -6,6 +7,7 @@ export const ExampleConfig = {
             config: {}
         }
     },
+    auth    : authRoles.user,
     routes  : [
         {
             path     : '/example',
