@@ -70,7 +70,7 @@ function FuseNavVerticalCollapse(props)
     const [open, setOpen] = useState(() => needsToBeOpened(props.location, props.item));
     const {item, nestedLevel, active} = props;
     let paddingValue = 40 + (nestedLevel * 16);
-    const listItemPadding = nestedLevel > 0 ? 'pl-' + (paddingValue > 80 ? 80 : paddingValue) : 'pl-24';
+    const listItemPadding = nestedLevel > 0 ? 'pr-' + (paddingValue > 80 ? 80 : paddingValue) : 'pr-24';
 
     useEffect(() => {
         if ( needsToBeOpened(props.location, props.item) )
@@ -98,11 +98,11 @@ function FuseNavVerticalCollapse(props)
                 onClick={handleClick}
             >
                 {item.icon && (
-                    <Icon color="action" className="text-16 flex-shrink-0 mr-16">{item.icon}</Icon>
+                    <Icon color="action" className="text-16 flex-shrink-0 ml-16">{item.icon}</Icon>
                 )}
                 <ListItemText className="list-item-text" primary={item.title} classes={{primary: 'text-14'}}/>
                 {item.badge && (
-                    <FuseNavBadge className="mr-4" badge={item.badge}/>
+                    <FuseNavBadge className="ml-4" badge={item.badge}/>
                 )}
                 <IconButton disableRipple className="w-16 h-16 p-0">
                     <Icon className="text-16 arrow-icon" color="inherit">

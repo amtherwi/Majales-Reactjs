@@ -342,7 +342,7 @@ function FuseSearch(props)
                         inputProps={{
                             variant        : props.variant,
                             classes,
-                            placeholder    : 'Search',
+                            placeholder    : 'بحث',
                             value          : state.searchText,
                             onChange       : handleChange,
                             onFocus        : showSearch,
@@ -406,7 +406,7 @@ function FuseSearch(props)
                                         {...autosuggestProps}
                                         inputProps={{
                                             classes,
-                                            placeholder    : 'Search',
+                                            placeholder    : 'بحث',
                                             value          : state.searchText,
                                             onChange       : handleChange,
                                             InputLabelProps: {

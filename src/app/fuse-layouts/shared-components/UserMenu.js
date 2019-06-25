@@ -84,13 +84,13 @@ function UserMenu(props)
                             <ListItemIcon className="min-w-40">
                                 <Icon>account_circle</Icon>
                             </ListItemIcon>
-                            <ListItemText className="pl-0" primary="My Profile"/>
+                            <ListItemText className="pl-0" primary="ملفي الشخصي"/>
                         </MenuItem>
                         <MenuItem component={Link} to="/apps/mail" onClick={userMenuClose}>
                             <ListItemIcon className="min-w-40">
                                 <Icon>mail</Icon>
                             </ListItemIcon>
-                            <ListItemText className="pl-0" primary="Inbox"/>
+                            <ListItemText className="pl-0" primary="البريد"/>
                         </MenuItem>
                         <MenuItem
                             onClick={() => {
@@ -101,7 +101,7 @@ function UserMenu(props)
                             <ListItemIcon className="min-w-40">
                                 <Icon>exit_to_app</Icon>
                             </ListItemIcon>
-                            <ListItemText className="pl-0" primary="Logout"/>
+                            <ListItemText className="pl-0" primary="تسجيل الخروج"/>
                         </MenuItem>
                     </React.Fragment>
                 )}

@@ -16,20 +16,17 @@ class Auth extends Component {
         };
     }
     componentDidMount() {
-        console.log('component did mount');
         this.jwtCheck();
-
-
     }
+
     jwtCheck = () => {
         jwtService.on('noAccessToken', () => {
-            console.log('state set');
             this.setState({render : true});
         });
 
         jwtService.on('onAutoLogin', () => {
 
-            this.props.showMessage({message: 'Logging in with JWT'});
+            this.props.showMessage({message: 'جاري تسجيل الدخول الى النظام'});
 
             jwtService.signInWithToken()
                 .then(user => {
@@ -40,7 +37,7 @@ class Auth extends Component {
                         }
                     };
                     this.props.setUserData(userobj);
-                    this.props.showMessage({message: 'Logged in with JWT'});
+                    this.props.showMessage({message: 'تم تسجيل الدخول الى النظام'});
                     this.setState({render : true});
                 })
                 .catch(error => {

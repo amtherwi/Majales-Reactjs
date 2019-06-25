@@ -47,7 +47,7 @@ function FuseNavVerticalItem(props)
     const classes = useStyles(props);
     const {item, nestedLevel, active} = props;
     let paddingValue = 40 + (nestedLevel * 16);
-    const listItemPadding = nestedLevel > 0 ? 'pl-' + (paddingValue > 80 ? 80 : paddingValue) : 'pr-24';
+    const listItemPadding = nestedLevel > 0 ? 'pr-' + (paddingValue > 80 ? 80 : paddingValue) : 'pr-24';
 
     if ( !FuseUtils.hasPermission(item.auth, userRole) )
     {
