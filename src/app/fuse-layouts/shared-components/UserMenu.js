@@ -35,7 +35,7 @@ function UserMenu(props)
                     )
                 }
 
-                <div className="hidden md:flex flex-col ml-12 items-start">
+                <div className="hidden md:flex flex-col mr-12 items-start">
                     <Typography component="span" className="normal-case font-600 flex">
                         {user.data.displayName}
                     </Typography>
@@ -44,7 +44,7 @@ function UserMenu(props)
                     </Typography>
                 </div>
 
-                <Icon className="text-16 ml-12 hidden sm:flex" variant="action">keyboard_arrow_down</Icon>
+                <Icon className="text-16 mr-12 hidden sm:flex" variant="action">keyboard_arrow_down</Icon>
             </Button>
 
             <Popover
@@ -63,34 +63,19 @@ function UserMenu(props)
                     paper: "py-8"
                 }}
             >
-                {!user.role || user.role.length === 0 ? (
-                    <React.Fragment>
-                        <MenuItem component={Link} to="/login">
-                            <ListItemIcon className="min-w-40">
-                                <Icon>lock</Icon>
-                            </ListItemIcon>
-                            <ListItemText className="pl-0" primary="Login"/>
-                        </MenuItem>
-                        <MenuItem component={Link} to="/register">
-                            <ListItemIcon className="min-w-40">
-                                <Icon>person_add</Icon>
-                            </ListItemIcon>
-                            <ListItemText className="pl-0" primary="Register"/>
-                        </MenuItem>
-                    </React.Fragment>
-                ) : (
+                {
                     <React.Fragment>
                         <MenuItem component={Link} to="/pages/profile" onClick={userMenuClose}>
                             <ListItemIcon className="min-w-40">
                                 <Icon>account_circle</Icon>
                             </ListItemIcon>
-                            <ListItemText className="pl-0" primary="ملفي الشخصي"/>
+                            <ListItemText className="pr-0" primary="ملفي الشخصي"/>
                         </MenuItem>
                         <MenuItem component={Link} to="/apps/mail" onClick={userMenuClose}>
                             <ListItemIcon className="min-w-40">
                                 <Icon>mail</Icon>
                             </ListItemIcon>
-                            <ListItemText className="pl-0" primary="البريد"/>
+                            <ListItemText className="pr-0" primary="البريد"/>
                         </MenuItem>
                         <MenuItem
                             onClick={() => {
@@ -104,7 +89,7 @@ function UserMenu(props)
                             <ListItemText className="pl-0" primary="تسجيل الخروج"/>
                         </MenuItem>
                     </React.Fragment>
-                )}
+                }
             </Popover>
         </React.Fragment>
     );

@@ -1,11 +1,10 @@
 const navigationConfig = [
     {
-        'id'      : 'dashboards',
-        'title'   : 'الصفحة الرئيسية',
-        'type'    : 'item',
-        'icon'    : 'home',
-        'url'  : '/example'
-    },
+        'id'      : 'main-nav-bar',
+        'title'   : 'القائمة الرئيسية',
+        'type'    : 'group',
+        'icon'    : 'apps',
+        'children': [
     {
         'id'      : 'admin-application',
         'title'   : 'ادارة نظام مجالس',
@@ -169,6 +168,8 @@ const navigationConfig = [
                 ]
             }
         ]
+    }
+    ]
     }
 ];
 
