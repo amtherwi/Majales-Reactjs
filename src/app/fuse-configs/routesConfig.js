@@ -2,18 +2,18 @@ import React from 'react';
 import {Redirect} from 'react-router-dom';
 import {FuseUtils} from '@fuse';
 import {LoginConfig} from 'app/main/login/LoginConfig';
-import {ExampleConfig} from 'app/main/example/ExampleConfig';
+import {MajalesRolesAppConfig} from 'app/main/mainpage/MajalesRolesAppConfig';
 
 const routeConfigs = [
     LoginConfig,
-    ExampleConfig
+    MajalesRolesAppConfig
 ];
 
 const routes = [
     ...FuseUtils.generateRoutesFromConfigs(routeConfigs),
     {
         path     : '/',
-        component: () => <Redirect to="/example"/>
+        component: () => <Redirect to="/majalesroles"/>
     }
 ];
 

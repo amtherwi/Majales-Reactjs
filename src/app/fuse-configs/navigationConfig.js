@@ -118,7 +118,7 @@ const navigationConfig = [
                 'title'   : 'المجالس',
                 'type'    : 'item',
                 'icon'    : 'accessibility',
-                'url'  : '/roles'
+                'url'  : '/majalesroles'
             },
             {
                 'id'      : 'myrequests',
