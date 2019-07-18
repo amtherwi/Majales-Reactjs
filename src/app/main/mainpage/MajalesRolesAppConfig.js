@@ -7,7 +7,10 @@ export const MajalesRolesAppConfig = {
     },
     auth    : authRoles.user,
     routes  : [
-
+        {
+            path     : '/majalesroles/:majalesroleType',
+            component: React.lazy(() => import('./meetings/meetings'))
+        },
         {
             path     : '/majalesroles',
             component: React.lazy(() => import('./majalesroles/majalesroles'))

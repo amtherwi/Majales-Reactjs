@@ -69,14 +69,14 @@ function Majalesroles(props)
                         className="flex flex-wrap w-full justify-center py-32 px-16"
                         enter={{
                             animation: "transition.slideUpBigIn",
-                            duration : 300
+                            duration : 1000
                         }}
                     >
 
                             <div className="w-224 h-224 p-16" key="secretary">
                                 <Badge className={clsx(classes.board, "flex flex-col items-center justify-center w-full h-full rounded")} badgeContent={10} color="secondary">
                                 <Link className={clsx(classes.board, "flex flex-col items-center justify-center w-full h-full rounded py-24")}
-                                    to={'/majlesroles/secretary'}
+                                    to={'/majalesroles/secretary'}
 
                                     role="button"
                                 >
@@ -89,7 +89,7 @@ function Majalesroles(props)
                         <div className="w-224 h-224 p-16" key='trustworthy'>
                             <Badge className={clsx(classes.board, "flex flex-col items-center justify-center w-full h-full rounded")} badgeContent={10} color="secondary">
                             <Link
-                                to={'/majlesroles/trustworthy'}
+                                to={'/majalesroles/trustworthy'}
                                 className={clsx(classes.board, "flex flex-col items-center justify-center w-full h-full rounded py-24")}
                                 role="button"
                             >
@@ -101,7 +101,7 @@ function Majalesroles(props)
                         <div className="w-224 h-224 p-16" key='president'>
                             <Badge className={clsx(classes.board, "flex flex-col items-center justify-center w-full h-full rounded ")} badgeContent={10} color="secondary">
                             <Link
-                                to={'/majlesroles/president'}
+                                to={'/majalesroles/president'}
                                 className={clsx(classes.board, "flex flex-col items-center justify-center w-full h-full rounded py-24")}
                                 role="button"
                             >
@@ -113,7 +113,7 @@ function Majalesroles(props)
                         <div className="w-224 h-224 p-16" key='member'>
                             <Badge className={clsx(classes.board, "flex flex-col items-center justify-center w-full h-full rounded")} badgeContent={10} color="secondary">
                             <Link
-                                to={'/majlesroles/member'}
+                                to={'/majalesroles/member'}
                                 className={clsx(classes.board, "flex flex-col items-center justify-center w-full h-full rounded py-24")}
                                 role="button"
                             >
