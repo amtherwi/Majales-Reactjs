@@ -84,11 +84,11 @@ function Meetings(props)
                                 المواضيع
                             </Typography>
                         </div>
-                    </div>0ذ1
+                    </div>
                 </Toolbar>
             </AppBar>
 
-            <div className={clsx("flex flex-1 overflow-x-auto overflow-y-hidden")}>
+            <div className={clsx("flex flex-1 overflow-y-auto overflow-x-hidden")}>
                             <div className="flex container p-16 md:p-24">
                                     <MeetingList />
                             </div>
