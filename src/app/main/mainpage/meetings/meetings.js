@@ -46,7 +46,7 @@ function Meetings(props)
 {
     const dispatch = useDispatch();
     const meetings = useSelector(({Meetings}) => Meetings.meetings);
-
+    const {majalesroleType} = props.match.params;
     const classes = useStyles(props);
 
     useEffect(() => {
@@ -90,7 +90,7 @@ function Meetings(props)
 
             <div className={clsx("flex flex-1 overflow-y-auto overflow-x-hidden")}>
                             <div className="flex container p-16 md:p-24">
-                                    <MeetingList />
+                                    <MeetingList majalesroleType={majalesroleType}/>
                             </div>
             </div>
 

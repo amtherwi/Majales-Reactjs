@@ -20,31 +20,12 @@ const useStyles = makeStyles(theme => ({
 function MeetingList(props)
 {
     const classes = useStyles(props);
-    return (
+    const {majalesroleType} = props;
 
+    return (
         <div className={classes.root}>
             <Grid container spacing={5}>
-                <MeetingCard/>
-                <MeetingCard/>
-                <MeetingCard/>
-                <MeetingCard/>
-                <MeetingCard/>
-                <MeetingCard/>
-                <MeetingCard/>
-                <MeetingCard/>
-                <MeetingCard/>
-                <MeetingCard/>
-                <MeetingCard/>
-                <MeetingCard/>
-                <MeetingCard/>
-                <MeetingCard/>
-                <MeetingCard/>
-                <MeetingCard/>
-                <MeetingCard/>
-                <MeetingCard/>
-                <MeetingCard/>
-                <MeetingCard/>
-                <MeetingCard/>
+                <MeetingCard majalesroleType={majalesroleType}/>
             </Grid>
         </div>
 

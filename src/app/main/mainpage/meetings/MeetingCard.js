@@ -1,5 +1,6 @@
 import React, {useRef} from 'react';
 import {Button, Icon, RootRef, Card, CardContent, CardActions, Typography, Grid} from '@material-ui/core';
+import {Link} from 'react-router-dom';
 import {FuseAnimateGroup} from '@fuse';
 import {darken} from '@material-ui/core/styles/colorManipulator';
 import {makeStyles} from '@material-ui/styles';
@@ -18,7 +19,7 @@ function MeetingCard(props)
 {
     const classes = useStyles(props);
     const contentScrollEl = useRef(null);
-
+    const {majalesroleType} = props;
     return (
         <Grid item>
             <FuseAnimateGroup
@@ -69,7 +70,8 @@ function MeetingCard(props)
                 </RootRef>
 
                 <CardActions className="p-0 flex-shrink-0">
-                    <Button classes={{
+                    <Button to={`/majalesroles/${majalesroleType}/100/view`} component={Link}
+                            classes={{
                         root : "normal-case font-600 w-full rounded-none h-48",
                         label: "justify-start"
                     }}
