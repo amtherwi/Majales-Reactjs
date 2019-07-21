@@ -2,17 +2,17 @@ import React, {useState} from 'react';
 import {Avatar, Button, Tab, Tabs, Typography} from '@material-ui/core';
 import {makeStyles} from '@material-ui/styles';
 import {FusePageSimple, FuseAnimate} from '@fuse';
-import TimelineTab from './tabs/TimelineTab';
-import PhotosVideosTab from './tabs/PhotosVideosTab';
+import ThreadsTab from './tabs/ThreadsTab';
 import AboutTab from './tabs/AboutTab';
+import {Link} from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
     layoutHeader: {
-        height                        : 320,
-        minHeight                     : 320,
+        height                        : 120,
+        minHeight                     : 120,
         [theme.breakpoints.down('md')]: {
-            height   : 240,
-            minHeight: 240
+            height   : 100,
+            minHeight: 100
         }
     }
 }));
@@ -36,17 +36,13 @@ function Meeting()
             header={
                 <div className="p-24 flex flex-1 flex-col items-center justify-center md:flex-row md:items-end">
                     <div className="flex flex-1 flex-col items-center justify-center md:flex-row md:items-center md:justify-start">
-                        <FuseAnimate animation="transition.expandIn" delay={300}>
-                            <Avatar className="w-96 h-96" src="assets/images/avatars/Velazquez.jpg"/>
-                        </FuseAnimate>
                         <FuseAnimate animation="transition.slideLeftIn" delay={300}>
-                            <Typography className="md:ml-24" variant="h4" color="inherit">John Doe</Typography>
+                            <Typography className="md:mr-24" variant="h4" color="inherit">جلسة القسم 23</Typography>
                         </FuseAnimate>
                     </div>
 
                     <div className="flex items-center justify-end">
-                        <Button className="mr-8 normal-case" variant="contained" color="secondary" aria-label="Follow">Follow</Button>
-                        <Button className="normal-case" variant="contained" color="primary" aria-label="Send Message">Send Message</Button>
+                        <Button to="/majalesroles" component={Link} className="ml-8 normal-case" variant="contained" color="secondary" aria-label="Follow">المجالس</Button>
                     </div>
                 </div>
             }
@@ -66,28 +62,21 @@ function Meeting()
                         classes={{
                             root: "h-64"
                         }}
-                        label="Timeline"/>
+                        label="المواضيع"/>
                     <Tab
                         classes={{
                             root: "h-64"
-                        }} label="About"/>
-                    <Tab
-                        classes={{
-                            root: "h-64"
-                        }} label="Photos & Videos"/>
+                        }} label="حول الاجتماع"/>
                 </Tabs>
             }
             content={
                 <div className="p-16 sm:p-24">
                     {selectedTab === 0 &&
                     (
-                        <TimelineTab/>
+                        <ThreadsTab/>
                     )}
                     {selectedTab === 1 && (
                         <AboutTab/>
-                    )}
-                    {selectedTab === 2 && (
-                        <PhotosVideosTab/>
                     )}
                 </div>
             }

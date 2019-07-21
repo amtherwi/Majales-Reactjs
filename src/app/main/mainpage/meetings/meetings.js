@@ -57,9 +57,7 @@ function Meetings(props)
     }, [dispatch]);
 
     return (
-        <div
-            className="flex flex-1 flex-col w-full h-full relative"
-        >
+        <div className="flex flex-1 flex-col w-full h-full relative" >
             <AppBar position="static" color="primary">
                 <Toolbar className="flex items-center justify-between px-4 sm:px-24 h-64 sm:h-96 container">
                     <Hidden xsDown>
@@ -81,7 +79,7 @@ function Meetings(props)
                                 className="text-16 font-600 cursor-pointer"
                                 color="inherit"
                             >
-                                المواضيع
+                                الإجتماعات
                             </Typography>
                         </div>
                     </div>

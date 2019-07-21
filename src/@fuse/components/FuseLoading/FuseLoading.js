@@ -18,7 +18,7 @@ function FuseLoading(props)
 
     return (
         <div className="flex flex-1 flex-col items-center justify-center">
-            <Typography className="text-20 mb-16" color="textSecondary">Loading...</Typography>
+            <Typography className="text-20 mb-16" color="textSecondary">جاري التحميل ....</Typography>
             <LinearProgress className="w-xs" color="secondary"/>
         </div>
     );
