@@ -41,13 +41,13 @@ const navigationConfig = [
                         'id'   : 'view-members',
                         'title': 'عرض الأعضاء',
                         'type' : 'item',
-                        'url'  : '/admin/member/all'
+                        'url'  : '/admin/members/all'
                     },
                     {
                         'id'   : 'add-member',
                         'title': 'إضافة عضو',
                         'type' : 'item',
-                        'url'  : '/admin/member/add'
+                        'url'  : '/admin/members/add'
                     }
                 ]
             },
