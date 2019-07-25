@@ -24,7 +24,7 @@ const defaultFormState = {
     'notes'     : ''
 };
 
-function MemberDialog(props)
+function MembershipInfo(props)
 {
     const dispatch = useDispatch();
     const memberDialog =  useSelector(({membersApp}) => membersApp.members.memberDialog);
@@ -331,4 +331,4 @@ function MemberDialog(props)
     );
 }
 
-export default MemberDialog;
+export default MembershipInfo;

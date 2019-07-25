@@ -76,7 +76,7 @@ export function deSelectAllMembers()
 export function openNewMemberDialog()
 {
     return {
-        type:  OPEN_EDIT_MEMBER_DIALOG
+        type:  OPEN_NEW_MEMBER_DIALOG
     }
 }
 

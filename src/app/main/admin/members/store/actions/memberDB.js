@@ -170,7 +170,59 @@ const membersDB = {
         ,
         Securtary:['4','6','7','8']
         } 
-    ]
+    ],
+    Membership: [
+        {
+            'id': '12345',
+            'title': 'مجلس الجامعة',
+            'bmembers': [
+                {
+                    'chairman':'10'
+                },
+                {
+                    'supervisor': '1'
+                },
+                {
+                    'Secretary':['2','3']        
+                },
+                {
+                    'cmembers':[
+                        '8',
+                        '4',
+                        '5',
+                        '6',
+                        '7',
+                        '9'
+                    ]
+                }
+            ],
+        },
+        {
+            'id': '12375',
+            'title': 'اللجنة الفنية العليا',
+            'bmembers': [
+                {
+                    'chairman':'10'
+                },
+                {
+                    'supervisor': '4'
+                },
+                {
+                    'Secretary':['2']        
+                },
+                {
+                    'cmembers':[
+                        '8',
+                        '1',
+                        '5',
+                        '6',
+                        '7',
+                        '9'
+                    ]
+                }
+            ],
+        },
+    ],
 };
 
 

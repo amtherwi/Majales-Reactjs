@@ -122,6 +122,7 @@ function MembersList(props)
                         Header    : "الأب",
                         accessor  : "mname",
                         filterable: true,
+                        filterMethod: "Contains",
                         className : "font-bold"
                     },
                     {
@@ -158,7 +159,7 @@ function MembersList(props)
                                 <IconButton
                                     onClick={(ev) => {
                                         ev.stopPropagation();
-                                        dispatch(Actions.openEditMemberDialog(row.original.id))
+                                        dispatch(Actions.openEditMemberDialog(row.original))
                                     }}
                                 >
       
