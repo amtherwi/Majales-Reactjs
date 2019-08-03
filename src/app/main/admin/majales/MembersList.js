@@ -98,57 +98,30 @@ function MembersList(props)
                         width    : 64
                     },
                     {
-                        Header   : () => (
-                            selectedmemberIds.length > 0 && (
-                                <membersMultiSelectMenu/>
-                            )
-                        ),
-                        accessor : "avatar",
-                        Cell     : row => (
-                            <Avatar className="mr-6" alt={row.original.name} src={row.value}/>
-                        ),
-                        className: "justify-center",
-                        width    : 64,
-                        sortable : false
-                    },
-                    {
-                        Header    : "الاسم الأول",
+                        Header    : "اسم المجلس",
                         accessor  : "fname",
                         filterable: true,
                         className : "font-bold"
                     },
                     {
-                        Header    : "الأب",
+                        Header    : "وصف المجلس",
                         accessor  : "mname",
                         filterable: true,
                         filterMethod: "Contains",
                         className : "font-bold"
                     },
                     {
-                        Header    : "العائلة",
+                        Header    : "تاريح المجلس",
                         accessor  : "lname",
                         filterable: true,
-                        className : "font-bold"
+                        className : "font-bold",
+                        width    : 248
                     },
                     {
-                        Header    : "الكلية/المعهد",
+                        Header    : "التفعيل",
                         accessor  : "employer",
-                        filterable: true
-                    },
-                    {
-                        Header    : "الوظيفة",
-                        accessor  : "jobTitle",
-                        filterable: true
-                    },
-                    {
-                        Header    : "البريد الإلكتروني",
-                        accessor  : "email",
-                        filterable: true
-                    },
-                    {
-                        Header    : "الجوال",
-                        accessor  : "phone",
-                        filterable: true
+                        filterable: true,
+                        width    : 128
                     },
                     {
                         Header: "",

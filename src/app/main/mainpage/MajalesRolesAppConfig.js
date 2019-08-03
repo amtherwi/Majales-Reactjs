@@ -8,15 +8,15 @@ export const MajalesRolesAppConfig = {
     auth    : authRoles.user,
     routes  : [
         {
-            path     : '/majalesroles/thread/:threadId',
+            path     : '/majalesroles/thread/:threadId/view',
             component: React.lazy(() => import('./thread/Thread'))
         },
         {
-            path     : '/majalesroles/:majalesroleType/:meetingid/view',
+            path     : '/majalesroles/meeting/:majalesroleType/:meetingid/view',
             component: React.lazy(() => import('./meetings/meeting/Meeting'))
         },
         {
-            path     : '/majalesroles/:majalesroleType',
+            path     : '/majalesroles/meeting/:majalesroleType',
             component: React.lazy(() => import('./meetings/meetings'))
         },
         {

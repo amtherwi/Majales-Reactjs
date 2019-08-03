@@ -32,10 +32,12 @@ const MembersHeader = (props) => {
                         <Icon className="text-32 mr-12">account_box</Icon>
                     </FuseAnimate>
                     <FuseAnimate animation="transition.slideLeftIn" delay={300}>
-                        <Typography variant="h6" className="hidden sm:flex">الأعضاء</Typography>
+                        <Typography variant="h6" className="hidden sm:flex">المجالس</Typography>
                     </FuseAnimate>
                 </div>
             </div>
+
+
         </div>
     );
 }

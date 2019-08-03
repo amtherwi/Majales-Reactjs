@@ -21,13 +21,13 @@ const navigationConfig = [
                         'id'   : 'view-boards',
                         'title': 'عرض المجالس',
                         'type' : 'item',
-                        'url'  : '/admin/board/all'
+                        'url'  : '/admin/majales/all'
                     },
                     {
                         'id'   : 'add-board',
                         'title': 'إضافة مجلس',
                         'type' : 'item',
-                        'url'  : '/admin/board/add'
+                        'url'  : '/admin/majales/add'
                     }
                 ]
             },

@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import {Avatar, Button, Tab, Tabs, Typography} from '@material-ui/core';
 import {makeStyles} from '@material-ui/styles';
 import {FusePageSimple, FuseAnimate} from '@fuse';
+import ThreadTab from './tabs/ThreadTab';
+import DecisionTab from './tabs/DecisionTab';
 import {Link} from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
@@ -17,8 +19,14 @@ const useStyles = makeStyles(theme => ({
 
 function Thread()
 {
-
     const classes = useStyles();
+    const [selectedTab, setSelectedTab] = useState(0);
+
+    function handleTabChange(event, value)
+    {
+        setSelectedTab(value);
+    }
+
     return (
         <FusePageSimple
             classes={{
@@ -34,12 +42,44 @@ function Thread()
                     </div>
 
                     <div className="flex items-center justify-end">
-                        <Button to="/majalesroles" component={Link} className="ml-8 normal-case" variant="contained" color="secondary" aria-label="Follow">الإجتماع</Button>
+                        <Button to="/majalesroles" component={Link} className="ml-8 normal-case" variant="contained" color="secondary" aria-label="Follow">المجالس</Button>
                     </div>
                 </div>
             }
-
-
+            contentToolbar={
+                <Tabs
+                    value={selectedTab}
+                    onChange={handleTabChange}
+                    indicatorColor="secondary"
+                    textColor="secondary"
+                    variant="scrollable"
+                    scrollButtons="off"
+                    classes={{
+                        root: "h-64 w-full border-b-1"
+                    }}
+                >
+                    <Tab
+                        classes={{
+                            root: "h-64"
+                        }}
+                        label="الموضوع"/>
+                    <Tab
+                        classes={{
+                            root: "h-64"
+                        }} label="القرار"/>
+                </Tabs>
+            }
+            content={
+                <div className="p-16 sm:p-24">
+                    {selectedTab === 0 &&
+                    (
+                        <ThreadTab/>
+                    )}
+                    {selectedTab === 1 && (
+                        <DecisionTab/>
+                    )}
+                </div>
+            }
         />
     )
 }

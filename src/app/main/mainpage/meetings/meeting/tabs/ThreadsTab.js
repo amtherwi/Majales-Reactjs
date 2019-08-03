@@ -106,7 +106,7 @@ function ThreadsTab()
                                     {rows1.map(row => (
                                         <StyledTableRow key={row.threadname}>
                                             <StyledTableCell  component="th"  scope="row">
-                                                <Link className={classes.tablelink} to="/majalesroles/thread/120" role="button">{row.threadname}</Link>
+                                                <Link className={classes.tablelink} to="/majalesroles/thread/120/view" role="button">{row.threadname}</Link>
                                             </StyledTableCell>
                                             <StyledTableCell align="right">{row.comment}</StyledTableCell>
                                             <StyledTableCell align="right">{row.input}</StyledTableCell>
@@ -139,7 +139,7 @@ function ThreadsTab()
                                         {rows2.map(row => (
                                             <StyledTableRow key={row.threadname}>
                                                 <StyledTableCell  component="th"  scope="row">
-                                                    <Link className={classes.tablelink} to="/majalesroles/thread/120" role="button">{row.threadname}</Link>
+                                                    <Link className={classes.tablelink} to="/majalesroles/thread/120/view" role="button">{row.threadname}</Link>
                                                 </StyledTableCell>
                                                 <StyledTableCell align="right">{row.comment}</StyledTableCell>
                                                 <StyledTableCell align="right">{row.input}</StyledTableCell>
