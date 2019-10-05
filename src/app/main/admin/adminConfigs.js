@@ -1,7 +1,11 @@
 import { MembersAppConfig } from './members/MembersAppConfig';
-import { BoardsAppConfig } from './boards/boardsAppConfig';
+import { MajalesAppConfig } from './majales/MembersAppConfig';
+import { CategoryAppConfig } from './category/MembersAppConfig';
+
+
 
 export const adminConfigs = [
     MembersAppConfig,
-    BoardsAppConfig,
+    MajalesAppConfig,
+    CategoryAppConfig
 ];

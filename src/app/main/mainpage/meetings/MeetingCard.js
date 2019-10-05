@@ -70,7 +70,7 @@ function MeetingCard(props)
                 </RootRef>
 
                 <CardActions className="p-0 flex-shrink-0">
-                    <Button to={`/majalesroles/${majalesroleType}/100/view`} component={Link}
+                    <Button to={`/majalesroles/meeting/${majalesroleType}/100/view`} component={Link}
                             classes={{
                         root : "normal-case font-600 w-full rounded-none h-48",
                         label: "justify-start"

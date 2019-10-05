@@ -72,11 +72,34 @@ function Majalesroles(props)
                             duration : 1000
                         }}
                     >
-
+                        <div className="w-224 h-224 p-16" key='president'>
+                            <Badge className={clsx(classes.board, "flex flex-col items-center justify-center w-full h-full rounded ")} badgeContent={10} color="secondary">
+                                <Link
+                                    to={'/majalesroles/meeting/president'}
+                                    className={clsx(classes.board, "flex flex-col items-center justify-center w-full h-full rounded py-24")}
+                                    role="button"
+                                >
+                                    <Icon className="text-56">account_balance</Icon>
+                                    <Typography className="text-16 font-300 text-center pt-16 px-32" color="inherit">رئيس</Typography>
+                                </Link>
+                            </Badge>
+                        </div>
+                        <div className="w-224 h-224 p-16" key='trustworthy'>
+                            <Badge className={clsx(classes.board, "flex flex-col items-center justify-center w-full h-full rounded")} badgeContent={10} color="secondary">
+                                <Link
+                                    to={'/majalesroles/meeting/trustworthy'}
+                                    className={clsx(classes.board, "flex flex-col items-center justify-center w-full h-full rounded py-24")}
+                                    role="button"
+                                >
+                                    <Icon className="text-56">supervisor_account</Icon>
+                                    <Typography className="text-16 font-300 text-center pt-16 px-32" color="inherit">أمين</Typography>
+                                </Link>
+                            </Badge>
+                        </div>
                             <div className="w-224 h-224 p-16" key="secretary">
                                 <Badge className={clsx(classes.board, "flex flex-col items-center justify-center w-full h-full rounded")} badgeContent={10} color="secondary">
                                 <Link className={clsx(classes.board, "flex flex-col items-center justify-center w-full h-full rounded py-24")}
-                                    to={'/majalesroles/secretary'}
+                                    to={'/majalesroles/meeting/secretary'}
 
                                     role="button"
                                 >
@@ -86,34 +109,11 @@ function Majalesroles(props)
                                 </Badge>
                             </div>
 
-                        <div className="w-224 h-224 p-16" key='trustworthy'>
-                            <Badge className={clsx(classes.board, "flex flex-col items-center justify-center w-full h-full rounded")} badgeContent={10} color="secondary">
-                            <Link
-                                to={'/majalesroles/trustworthy'}
-                                className={clsx(classes.board, "flex flex-col items-center justify-center w-full h-full rounded py-24")}
-                                role="button"
-                            >
-                                <Icon className="text-56">supervisor_account</Icon>
-                                <Typography className="text-16 font-300 text-center pt-16 px-32" color="inherit">أمين</Typography>
-                            </Link>
-                            </Badge>
-                        </div>
-                        <div className="w-224 h-224 p-16" key='president'>
-                            <Badge className={clsx(classes.board, "flex flex-col items-center justify-center w-full h-full rounded ")} badgeContent={10} color="secondary">
-                            <Link
-                                to={'/majalesroles/president'}
-                                className={clsx(classes.board, "flex flex-col items-center justify-center w-full h-full rounded py-24")}
-                                role="button"
-                            >
-                                <Icon className="text-56">account_balance</Icon>
-                                <Typography className="text-16 font-300 text-center pt-16 px-32" color="inherit">رئيس</Typography>
-                            </Link>
-                            </Badge>
-                        </div>
+
                         <div className="w-224 h-224 p-16" key='member'>
                             <Badge className={clsx(classes.board, "flex flex-col items-center justify-center w-full h-full rounded")} badgeContent={10} color="secondary">
                             <Link
-                                to={'/majalesroles/member'}
+                                to={'/majalesroles/meeting/member'}
                                 className={clsx(classes.board, "flex flex-col items-center justify-center w-full h-full rounded py-24")}
                                 role="button"
                             >
