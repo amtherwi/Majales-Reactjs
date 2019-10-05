@@ -1,25 +1,24 @@
 import * as Actions from '../actions';
 
 const initialState = {
-    data      : [],
-    searchText: ''
+    data: null
 };
 
-const membersReducer = function (state = initialState, action) {
+const boardReducer = function (state = initialState, action) {
     switch ( action.type )
     {
-        case Actions.GET_MEMBERS:
+        case Actions.GET_BOARD:
         {
             return {
                 ...state,
                 data: action.payload
             };
         }
-        case Actions.SET_MEMBERS_SEARCH_TEXT:
+        case Actions.SAVE_BOARD:
         {
             return {
                 ...state,
-                searchText: action.searchText
+                data: action.payload
             };
         }
         default:
@@ -29,4 +28,4 @@ const membersReducer = function (state = initialState, action) {
     }
 };
 
-export default membersReducer;
+export default boardReducer;
