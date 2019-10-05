@@ -21,7 +21,7 @@ const navigationConfig = [
                         'id'   : 'view-boards',
                         'title': 'عرض المجالس',
                         'type' : 'item',
-                        'url'  : '/admin/board/all'
+                        'url'  : '/admin/boards/all'
                     },
                     {
                         'id'   : 'add-board',

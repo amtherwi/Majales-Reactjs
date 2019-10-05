@@ -1,12 +1,11 @@
 import React from 'react';
 import {FusePageCarded} from '@fuse';
 import withReducer from 'app/store/withReducer';
+import BoardsTable from './components/BoardsTable';
+import BoardsHeader from './components/BoardsHeader';
+import reducer from './store/reduces';
 
-import MembersTable from './components/MembersTable';
-import MembersHeader from './components/MembersHeader';
-import reducer from './store/reducers';
-
-function MembersApp()
+function boardsApp()
 {
     return (
         <FusePageCarded
@@ -15,14 +14,14 @@ function MembersApp()
                 header : "min-h-72 h-72 sm:h-136 sm:min-h-136"
             }}
             header={
-                <MembersHeader/>
+                <BoardsHeader/>
             }
             content={
-                <MembersTable/>
+                <BoardsTable/>
             }
             innerScroll
         />
     );
 }
 
-export default withReducer('membersApp', reducer)(MembersApp);
+export default withReducer('boardsApp', reducer)(boardsApp);

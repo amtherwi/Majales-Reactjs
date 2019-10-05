@@ -5,17 +5,17 @@ const initialState = {
     searchText: ''
 };
 
-const membersReducer = function (state = initialState, action) {
+const boardsReducer = function (state = initialState, action) {
     switch ( action.type )
     {
-        case Actions.GET_MEMBERS:
+        case Actions.GET_BOARDS:
         {
             return {
                 ...state,
                 data: action.payload
             };
         }
-        case Actions.SET_MEMBERS_SEARCH_TEXT:
+        case Actions.SET_BOARDS_SEARCH_TEXT:
         {
             return {
                 ...state,
@@ -29,4 +29,4 @@ const membersReducer = function (state = initialState, action) {
     }
 };
 
-export default membersReducer;
+export default boardsReducer;
