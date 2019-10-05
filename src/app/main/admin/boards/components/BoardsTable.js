@@ -23,7 +23,7 @@ import {useDispatch, useSelector} from 'react-redux';
     });
     
     useEffect(() => {
-        dispatch(Actions.getMajales());
+        dispatch(Actions.getBoard());
     }, [dispatch]);
     
     useEffect(() => {

@@ -7,7 +7,7 @@ export const SAVE_BOARD = '[BOARD APP] SAVE BOARD';
 
 export function getBoard(params)
 {
-    const request = axios.get('http://localhost:4000/boards', {params});
+    const request = axios.get('http://localhost:21021/api/services/app/Majles/GetAll', {params});
 
     return (dispatch) =>
         request.then((response) =>
