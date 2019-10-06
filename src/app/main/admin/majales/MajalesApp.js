@@ -1,13 +1,32 @@
-import React from 'react';
+import React , {useEffect, useRef, useState}from 'react';
 import {FusePageCarded} from '@fuse';
+import {useDispatch, useSelector} from 'react-redux';
+
+
 import withReducer from 'app/store/withReducer';
+import * as Actions from './store/actions'
+import reducer from './store/reducers';
 
 import MajalesTable from './components/MajalesTable';
 import MajalesHeader from './components/MajalesHeader';
-import reducer from './store/reducers';
+
 
 function MajalesApp()
 {
+    const dispatch = useDispatch();
+    const majales = useSelector(({majalesApp}) => majalesApp.majales);
+
+    useEffect(() => {
+        dispatch(Actions.getMajales());
+    }, [dispatch]);
+
+    if ( !majales )
+    {
+        return null;
+    }else{
+        console.log(majales);
+    }
+
     return (
         <FusePageCarded
             classes={{

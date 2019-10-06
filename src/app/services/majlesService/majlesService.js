@@ -25,7 +25,7 @@ class majlesService extends FuseUtils.EventEmitter {
     
     getMajales = () => {
         return new Promise((resolve, reject) => {
-            axios.get('http://localhost:21021/api/services/app/Majles/GetAll', )
+            axios.post('http://localhost:21021/api/services/app/Majles/ListAll', )
                 .then(response => {
                     if ( response.data.success)
                     {
