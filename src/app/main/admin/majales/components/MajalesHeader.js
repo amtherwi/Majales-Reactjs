@@ -7,10 +7,10 @@ import {useDispatch, useSelector} from 'react-redux';
 import {Link} from 'react-router-dom';
 import * as Actions from '../store/actions';
 
-const BoardsHeader = (props) => {
+const MajalesHeader = (props) => {
 
     const dispatch = useDispatch();
-    const searchText = useSelector(({boardsApp}) => boardsApp.boards.searchText);
+    const searchText = useSelector(({majalesApp}) => majalesApp.majales.searchText);
     const mainTheme = useSelector(({fuse}) => fuse.settings.mainTheme);
 
     return (
@@ -18,10 +18,10 @@ const BoardsHeader = (props) => {
 
             <div className="flex items-center">
                 <FuseAnimate animation="transition.expandIn" delay={300}>
-                    <Icon className="text-32 mr-0 sm:mr-12">meeting_room</Icon>
+                    <Icon className="text-32 mr-0 sm:mr-12">people</Icon>
                 </FuseAnimate>
                 <FuseAnimate animation="transition.slideLeftIn" delay={300}>
-                    <Typography className="hidden sm:flex" variant="h6">المجالس</Typography>
+                    <Typography className="hidden sm:flex" variant="h6">الأعضاء</Typography>
                 </FuseAnimate>
             </div>
 
@@ -42,7 +42,7 @@ const BoardsHeader = (props) => {
                                 inputProps={{
                                     'aria-label': 'Search'
                                 }}
-                                onChange={ev => dispatch(Actions.setBoardsSearchText(ev))}
+                                onChange={ev => dispatch(Actions.setSearchText(ev))}
                             />
                         </Paper>
                     </FuseAnimate>
@@ -51,7 +51,7 @@ const BoardsHeader = (props) => {
             </div>
             <FuseAnimate animation="transition.slideRightIn" delay={300}>
                 <Button component={Link} to="" className="whitespace-no-wrap" variant="contained">
-                    <span className="hidden sm:flex">Add New Product</span>
+                    <span className="hidden sm:flex">إضافة جديد</span>
                     <span className="flex sm:hidden">New</span>
                 </Button>
             </FuseAnimate>
@@ -59,4 +59,4 @@ const BoardsHeader = (props) => {
     );
 }
 
-export default BoardsHeader;
+export default MajalesHeader;

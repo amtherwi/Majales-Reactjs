@@ -8,39 +8,40 @@ const rows = [
     
     {
         id            : 'title',
-        align         : 'left',
-        disablePadding: false,
-        label         : 'اسم المجلس',
+        align         : 'center',
+        disablePadding: true,
+        label         : 'العنوان',
         sort          : true
     },
     {
         id            : 'description',
-        align         : 'left',
-        disablePadding: false,
-        label         : 'الوصف',
+        align         : 'center',
+        disablePadding: true,
+        label         : 'التفاصيل',
         sort          : true
     },
     {
         id            : 'owner',
-        align         : 'right',
-        disablePadding: false,
-        label         : 'الجهة',
-        sort          : true
-    },
-    {
-        id            : 'classificationId',
-        align         : 'right',
-        disablePadding: false,
-        label         : 'النوع',
+        align         : 'center',
+        disablePadding: true,
+        label         : 'المسؤول',
         sort          : true
     },
     {
         id            : 'activeStatus',
-        align         : 'right',
-        disablePadding: false,
+        align         : 'center',
+        disablePadding: true,
         label         : 'مفعل',
         sort          : true
+    },
+    {
+        id            : 'classificationid',
+        align         : 'center',
+        disablePadding: true,
+        label         : 'النوع',
+        sort          : true
     }
+    
 ];
 
 const useStyles = makeStyles(theme => ({
@@ -49,55 +50,55 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const  BoardsTableHead = (props) => {
+const  MajalesTableHead = (props) => {
     
     const classes = useStyles(props);
-    const [selectedBoardsMenu, setSelectedBoardsMenu] = useState(null);
+    const [selectedMajalesMenu, setSelectedMajalesMenu] = useState(null);
 
     const createSortHandler = property => event => {
         props.onRequestSort(event, property);
     };
 
-    function openSelectedBoardsMenu(event)
+    function openSelectedMajalesMenu(event)
     {
-        setSelectedBoardsMenu(event.currentTarget);
+        setSelectedMajalesMenu(event.currentTarget);
     }
 
-    function closeSelectedBoardsMenu()
+    function closeselectedMajalesMenu()
     {
-        setSelectedBoardsMenu(null);
+        setSelectedMajalesMenu(null);
     }
 
 
 
     return (
         <TableHead>
-            <TableRow className="h-64">
-                <TableCell padding="checkbox" className="relative pl-4 sm:pl-12">
+            <TableRow className="h-60">
+                <TableCell padding="checkbox" className="relative pl-4 sm:pl-8">
                     <Checkbox
                         indeterminate={props.numSelected > 0 && props.numSelected < props.rowCount}
                         checked={props.numSelected === props.rowCount}
                         onChange={props.onSelectAllClick}
                     />
                     {props.numSelected > 0 && (
-                        <div className={clsx("flex items-center justify-center absolute w-64 top-0 left-0 ml-68 h-64 z-10", classes.actionsButtonWrapper)}>
+                        <div className={clsx("flex items-center justify-center absolute w-60 top-0 left-0 ml-60 h-60 z-10", classes.actionsButtonWrapper)}>
                             <IconButton
-                                aria-owns={selectedBoardsMenu ? 'selectedBoardsMenu' : null}
+                                aria-owns={selectedMajalesMenu ? 'selectedMajalesMenu' : null}
                                 aria-haspopup="true"
-                                onClick={openSelectedBoardsMenu}
+                                onClick={openSelectedMajalesMenu}
                             >
                                 <Icon className='fg-red'>delete</Icon>
                             </IconButton>
                             <Menu
                                 id="selectedProductsMenu"
-                                anchorEl={selectedBoardsMenu}
-                                open={Boolean(selectedBoardsMenu)}
-                                onClose={closeSelectedBoardsMenu}
+                                anchorEl={selectedMajalesMenu}
+                                open={Boolean(selectedMajalesMenu)}
+                                onClose={closeselectedMajalesMenu}
                             >
                                 <MenuList>
                                     <MenuItem
                                         onClick={() => {
-                                            closeSelectedBoardsMenu();
+                                            closeselectedMajalesMenu();
                                         }}
                                     >
                                         <ListItemIcon className="min-w-40">
@@ -112,8 +113,8 @@ const  BoardsTableHead = (props) => {
                 </TableCell>
                 {rows.map(row => {
                     return (
-                        <TableCell
-                            className={classes.head}
+                        <TableCell 
+                             
                             key={row.id}
                             align={row.align}
                             padding={row.disablePadding ? 'none' : 'default'}
@@ -122,8 +123,8 @@ const  BoardsTableHead = (props) => {
                             {row.sort && (
                                 <Tooltip
                                     title="Sort"
-                                    placement={row.align === "right" ? 'bottom-end' : 'bottom-start'}
-                                    enterDelay={300}
+                                    placement={row.align === "center" ? 'bottom-end' : 'bottom-start'}
+                                    enterDelay={200}
                                 >
                                     <TableSortLabel
                                         active={props.order.id === row.id}
@@ -142,4 +143,4 @@ const  BoardsTableHead = (props) => {
     );
 }
 
-export default BoardsTableHead;
+export default MajalesTableHead;

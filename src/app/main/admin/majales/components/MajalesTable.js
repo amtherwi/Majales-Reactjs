@@ -4,31 +4,31 @@ import {FuseScrollbars} from '@fuse';
 import {withRouter} from 'react-router-dom';
 import clsx from 'clsx';
 import _ from '@lodash';
-import BoardsTableHead from './BoardsTableHead';
+import MajalesTableHead from './MajalesTableHead';
 import * as Actions from '../store/actions';
 import {useDispatch, useSelector} from 'react-redux';
- const BoardsTable = (props) =>  {
+ const MajalesTable = (props) =>  {
 
     const dispatch = useDispatch();
-    const boards =  useSelector(({boardsApp}) => boardsApp.boards.data);
-    const searchText = useSelector(({boardsApp}) => boardsApp.boards.searchText);
+    const majales =  useSelector(({majalesApp}) => majalesApp.majales.data);
+    const searchText = useSelector(({majalesApp}) => majalesApp.majales.searchText);
 
     const [selected, setSelected] = useState([]);
-    const [data, setData] = useState(boards);
+    const [data, setData] = useState(majales);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [order, setOrder] = useState({
         direction: 'asc',
         id       : null
     });
-    
+
     useEffect(() => {
-        dispatch(Actions.getBoard());
+        dispatch(Actions.getMajales());
     }, [dispatch]);
-    
+
     useEffect(() => {
-        setData(searchText.length === 0 ? boards : _.filter(boards, item => item.name.toLowerCase().includes(searchText.toLowerCase())))
-    }, [boards, searchText]);
+        setData(searchText.length === 0 ? majales : _.filter(majales, item => item.name.toLowerCase().includes(searchText.toLowerCase())))
+    }, [majales, searchText]);
 
     function handleRequestSort(event, property)
     {
@@ -103,10 +103,9 @@ import {useDispatch, useSelector} from 'react-redux';
         <div className="w-full flex flex-col">
 
             <FuseScrollbars className="flex-grow overflow-x-auto">
-            <Grid item xs={12}>
-                <Table className="min-w-xs" aria-labelledby="tableTitle">
+                <Table className="min-w-xl" aria-labelledby="tableTitle">
 
-                    <BoardsTableHead
+                    <MajalesTableHead
                         numSelected={selected.length}
                         order={order}
                         onSelectAllClick={handleSelectAllClick}
@@ -115,13 +114,27 @@ import {useDispatch, useSelector} from 'react-redux';
                     />
 
                     <TableBody>
-                        {_.orderBy(data)
+                        {_.orderBy(data, [
+                            (o) => {
+                                switch ( order.id )
+                                {
+                                    case 'owner':
+                                    {
+                                        return o.owner[0];
+                                    }
+                                    default:
+                                    {
+                                        return o[order.id];
+                                    }
+                                }
+                            }
+                        ], [order.direction])
                             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                             .map(n => {
                                 const isSelected = selected.indexOf(n.id) !== -1;
                                 return (
                                     <TableRow
-                                        className="h-64 cursor-pointer"
+                                        className="h-60 cursor-pointer"
                                         hover
                                         role="checkbox"
                                         aria-checked={isSelected}
@@ -130,7 +143,7 @@ import {useDispatch, useSelector} from 'react-redux';
                                         selected={isSelected}
                                         onClick={event => handleClick(n)}
                                     >
-                                        <TableCell className="w-48 px-4 sm:px-12" padding="checkbox">
+                                        <TableCell className="w-40 px-4 sm:px-8" padding="checkbox">
                                             <Checkbox
                                                 checked={isSelected}
                                                 onClick={event => event.stopPropagation()}
@@ -139,23 +152,19 @@ import {useDispatch, useSelector} from 'react-redux';
                                         </TableCell>
 
                                         <TableCell component="th" scope="row">
-                                            {n.title}
+                                            { n.title }
                                         </TableCell>
 
-                                        <TableCell className="truncate" component="th" scope="row">
+                                        <TableCell  component="td" scope="row">
                                             {n.description}
                                         </TableCell>
 
-                                        <TableCell component="th" scope="row" align="right">
+                                        <TableCell component="td" scope="row" >
                                             {n.owner}
                                         </TableCell>
 
-                                        <TableCell component="th" scope="row" align="right">
-                                            {n.classificationId}
-                                        </TableCell>
-
-                                        <TableCell component="th" scope="row" align="right">
-                                            {n.active ?
+                                        <TableCell component="td" scope="row" >
+                                        {n.activeStatus ?
                                                 (
                                                     <Icon className="text-green text-20">check_circle</Icon>
                                                 ) :
@@ -164,12 +173,15 @@ import {useDispatch, useSelector} from 'react-redux';
                                                 )
                                             }
                                         </TableCell>
+                                        <TableCell component="td" scope="row" >
+                                            {n.classificationid}
+                                        </TableCell>
+
                                     </TableRow>
                                 );
                             })}
                     </TableBody>
                 </Table>
-                </Grid>
             </FuseScrollbars>
 
             <TablePagination
@@ -190,4 +202,4 @@ import {useDispatch, useSelector} from 'react-redux';
     );
 }
 
-export default withRouter(BoardsTable);
+export default withRouter(MajalesTable);

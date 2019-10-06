@@ -1,9 +1,9 @@
 import {combineReducers} from 'redux';
-import members from './members.reducer';
+import majales from './majales.reducer';
 import user from './user.reducer';
 
 const reducer = combineReducers({
-    members,
+    majales,
     user
 });
 

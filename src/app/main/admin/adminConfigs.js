@@ -1,5 +1,5 @@
 import { MembersAppConfig } from './members/MembersAppConfig';
-import { MajalesAppConfig } from './majales/MembersAppConfig';
+import { MajalesAppConfig } from './majales/MajalesAppConfig';
 import { CategoryAppConfig } from './category/MembersAppConfig';
 
 

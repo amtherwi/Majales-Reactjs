@@ -10,7 +10,7 @@ export const MajalesAppConfig = {
     routes  : [
         {
             path     : '/admin/majales/:id',
-            component: React.lazy(() => import('./MembersApp'))
+            component: React.lazy(() => import('./MajalesApp'))
         },
         {
             path     : '/admin/majales',

@@ -5,17 +5,17 @@ const initialState = {
     searchText: ''
 };
 
-const boardsReducer = function (state = initialState, action) {
+const majalesReducer = function (state = initialState, action) {
     switch ( action.type )
     {
-        case Actions.GET_BOARDS:
+        case Actions.GET_MAJALES:
         {
             return {
                 ...state,
                 data: action.payload
             };
         }
-        case Actions.SET_BOARDS_SEARCH_TEXT:
+        case Actions.SET_MAJALES_SEARCH_TEXT:
         {
             return {
                 ...state,
@@ -29,4 +29,4 @@ const boardsReducer = function (state = initialState, action) {
     }
 };
 
-export default boardsReducer;
+export default majalesReducer;
