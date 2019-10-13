@@ -72,6 +72,26 @@ const navigationConfig = [
                 ]
             },
             {
+                'id'      : 'majlestype',
+                'title'   : 'تصنيفات المجالس',
+                'type'    : 'collapse',
+                'icon'    : 'category',
+                'children': [
+                    {
+                        'id'   : 'view-majletype',
+                        'title': 'عرض التصنيفات',
+                        'type' : 'item',
+                        'url'  : '/admin/majlestype/all'
+                    },
+                    {
+                        'id'   : 'add-majlestype',
+                        'title': 'إضافة تصنيف',
+                        'type' : 'item',
+                        'url'  : '/admin/majlestype/add'
+                    }
+                ]
+            },
+            {
                 'id'      : 'logsandreports',
                 'title'   : 'التقراير والإحصائات',
                 'type'    : 'collapse',

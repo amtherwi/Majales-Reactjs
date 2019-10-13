@@ -1,11 +1,11 @@
 import axios from 'axios';
 import FuseUtils from '@fuse/FuseUtils';
 
-class majlesService extends FuseUtils.EventEmitter {
+class majlestyepeService extends FuseUtils.EventEmitter {
 
-    getMajlesById = (id) => {
+    getMajlesTypeById = (id) => {
         return new Promise((resolve, reject) => {
-            axios.get('http://localhost:21021/api/services/app/Majles/GetMajlesById',{
+            axios.get('http://localhost:21021/api/services/app/MajlesTypes/GetMajlesTypesById',{
                 params: {
                     id
                 }
@@ -23,9 +23,9 @@ class majlesService extends FuseUtils.EventEmitter {
         });
     };
 
-    getMajales = () => {
+    getMajleType = () => {
         return new Promise((resolve, reject) => {
-            axios.get('http://localhost:21021/api/services/app/Majles/GetAll')
+            axios.get('http://localhost:21021/api/services/app/MajlesType/GetAll')
                 .then(response => {
                     if ( response.data.success)
                     {
@@ -39,9 +39,9 @@ class majlesService extends FuseUtils.EventEmitter {
         });
     }
 
-    createMajles = (majles) => {
+    createMajlesType = (majlestype) => {
         return new Promise((resolve, reject) => {
-            axios.post('http://localhost:21021/api/services/app/Majles/Create', majles)
+            axios.post('http://localhost:21021/api/services/app/MajlesTypes/Create', majlestype)
                 .then(response => {
                     if ( response.data.success )
                     {
@@ -55,10 +55,10 @@ class majlesService extends FuseUtils.EventEmitter {
         });
     };
 
-    updateMajles = (majles) => {
+    updateMajlesType = (majlestype) => {
         return new Promise((resolve, reject) => {
-            axios.put('http://localhost:21021/api/services/app/Majles/Update', {
-                majles: majles
+            axios.put('http://localhost:21021/api/services/app/MajlesTypes/Update', {
+                majlestype: majlestype
                 })
                 .then(response => {
                     if ( response.data.success )
@@ -73,10 +73,10 @@ class majlesService extends FuseUtils.EventEmitter {
         });
     };
 
-    deleteMajles = (id) => {
+    deleteMajlesType = (id) => {
         return new Promise((resolve, reject) => {
-            axios.post('http://localhost:21021/api/services/app/Majles/Delete', { 
-                params: {
+            axios.put('http://localhost:21021/api/services/app/MajlesTypes/Delete', { 
+                params: {   
                     id
                 }})
                 .then(response => {
@@ -93,6 +93,6 @@ class majlesService extends FuseUtils.EventEmitter {
     };
 }
 
-const instance = new majlesService();
+const instance = new majlestyepeService();
 
 export default instance;

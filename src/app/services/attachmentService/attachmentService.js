@@ -1,11 +1,11 @@
 import axios from 'axios';
 import FuseUtils from '@fuse/FuseUtils';
 
-class majlesService extends FuseUtils.EventEmitter {
+class attachmentService extends FuseUtils.EventEmitter {
 
-    getMajlesById = (id) => {
+    getAttachmentById = (id) => {
         return new Promise((resolve, reject) => {
-            axios.get('http://localhost:21021/api/services/app/Majles/GetMajlesById',{
+            axios.get('http://localhost:21021/api/services/app/Attachment/GetAttachmentsById',{
                 params: {
                     id
                 }
@@ -23,9 +23,9 @@ class majlesService extends FuseUtils.EventEmitter {
         });
     };
 
-    getMajales = () => {
+    getAttachment = () => {
         return new Promise((resolve, reject) => {
-            axios.get('http://localhost:21021/api/services/app/Majles/GetAll')
+            axios.get('http://localhost:21021/api/services/app/Attachment/GetAll')
                 .then(response => {
                     if ( response.data.success)
                     {
@@ -39,9 +39,9 @@ class majlesService extends FuseUtils.EventEmitter {
         });
     }
 
-    createMajles = (majles) => {
+    createAttachment = (attachment) => {
         return new Promise((resolve, reject) => {
-            axios.post('http://localhost:21021/api/services/app/Majles/Create', majles)
+            axios.post('http://localhost:21021/api/services/app/Attachment/Create', attachment)
                 .then(response => {
                     if ( response.data.success )
                     {
@@ -55,10 +55,10 @@ class majlesService extends FuseUtils.EventEmitter {
         });
     };
 
-    updateMajles = (majles) => {
+    updateAttachment = (attachment) => {
         return new Promise((resolve, reject) => {
-            axios.put('http://localhost:21021/api/services/app/Majles/Update', {
-                majles: majles
+            axios.put('http://localhost:21021/api/services/app/Attachment/Update', {
+                attachment: attachment
                 })
                 .then(response => {
                     if ( response.data.success )
@@ -73,10 +73,10 @@ class majlesService extends FuseUtils.EventEmitter {
         });
     };
 
-    deleteMajles = (id) => {
+    deleteAttachment = (id) => {
         return new Promise((resolve, reject) => {
-            axios.post('http://localhost:21021/api/services/app/Majles/Delete', { 
-                params: {
+            axios.put('http://localhost:21021/api/services/app/Attachment/Delete', { 
+                params: {   
                     id
                 }})
                 .then(response => {
@@ -93,6 +93,6 @@ class majlesService extends FuseUtils.EventEmitter {
     };
 }
 
-const instance = new majlesService();
+const instance = new attachmentService();
 
 export default instance;
