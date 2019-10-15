@@ -4,6 +4,8 @@ import {FuseAnimateGroup} from '@fuse';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import * as Actions from '../store/actions';
+import {useDispatch, useSelector} from 'react-redux';
 // import axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
@@ -18,6 +20,14 @@ const useStyles = makeStyles(theme => ({
     },
   }));
 //   "md:flex max-w-2xl"
+    // const dispatch = useDispatch();
+    // const majlestype =  useSelector(({classificationApp}) => classificationApp.calssification.data);
+    // const classes = useStyles();
+    // const [data, setData] = useState(majlestype);
+    // const [expanded, setExpanded] = useState(null);
+
+
+   
 function createData(role, inCost, outCost) {
     return { role, inCost, outCost };
   }
@@ -30,8 +40,13 @@ function createData(role, inCost, outCost) {
    
   ];
 
+
 const TypeDetails = (props) => {
 const classes = useStyles();
+// useEffect(() => {
+//     setData(() => dispatch(Actions.getClassification(props.id)));
+// }, [dispatch]);
+
     return (
         <div className={classes.root}>
             <Grid container spacing={2}>
