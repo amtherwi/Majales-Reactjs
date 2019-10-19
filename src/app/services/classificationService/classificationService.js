@@ -3,6 +3,26 @@ import FuseUtils from '@fuse/FuseUtils';
 
 class classificationService extends FuseUtils.EventEmitter {
 
+    getClassifyByMajlesType = (id) => {
+        return new Promise((resolve, reject) => {
+            axios.get('http://localhost:21021/api/services/app/Classification/GetClassificationByMajlieTypeId',{
+                params: {
+                    id
+                }
+            })
+            .then(response => {
+                if ( response.data.success)
+                {
+                    resolve(response.data.result);
+                }
+                else
+                {
+                    reject(response.data.error);
+                }
+            });
+        });
+    };
+
     getClassificationById = (id) => {
         return new Promise((resolve, reject) => {
             axios.get('http://localhost:21021/api/services/app/Classification/GetClassificationsById',{
@@ -23,7 +43,7 @@ class classificationService extends FuseUtils.EventEmitter {
         });
     };
 
-    getClassification = () => {
+    getClassifications = () => {
         return new Promise((resolve, reject) => {
             axios.get('http://localhost:21021/api/services/app/Classification/GetAll')
                 .then(response => {

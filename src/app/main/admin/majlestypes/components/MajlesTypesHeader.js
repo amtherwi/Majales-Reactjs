@@ -7,10 +7,10 @@ import {useDispatch, useSelector} from 'react-redux';
 import {Link} from 'react-router-dom';
 import * as Actions from '../store/actions';
 
-const MajlesTypeHeader = (props) => {
+const MajlesTypesHeader = (props) => {
 
     const dispatch = useDispatch();
-    const searchText = useSelector(({majlestypeApp}) => majlestypeApp.majlestype.searchText);
+    const searchText = useSelector(({majlestypesApp}) => majlestypesApp.majlestypes.searchText);
     const mainTheme = useSelector(({fuse}) => fuse.settings.mainTheme);
 
     return (
@@ -50,7 +50,7 @@ const MajlesTypeHeader = (props) => {
 
             </div>
             <FuseAnimate animation="transition.slideRightIn" delay={300}>
-                <Button component={Link} to="" className="whitespace-no-wrap" variant="contained">
+                <Button component={Link} to='/admin/majlestypes/new' className="whitespace-no-wrap"  variant="contained">
                     <span className="hidden sm:flex">إضافة جديد</span>
                     <span className="flex sm:hidden">New</span>
                 </Button>
@@ -59,4 +59,4 @@ const MajlesTypeHeader = (props) => {
     );
 }
 
-export default MajlesTypeHeader;
+export default MajlesTypesHeader;

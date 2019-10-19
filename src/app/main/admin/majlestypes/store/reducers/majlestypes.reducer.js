@@ -5,10 +5,10 @@ const initialState = {
     searchText: ''
 };
 
-const majlestypeReducer = function (state = initialState, action) {
+const majlestypesReducer = function (state = initialState, action) {
     switch ( action.type )
     {
-        case Actions.GET_MAJLESTYPE:
+        case Actions.GET_MAJLESTYPES:
         {
             return {
                 ...state,
@@ -29,4 +29,4 @@ const majlestypeReducer = function (state = initialState, action) {
     }
 };
 
-export default majlestypeReducer;
+export default majlestypesReducer;

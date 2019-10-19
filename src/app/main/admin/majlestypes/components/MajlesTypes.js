@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useMemo} from 'react';
 import {Divider,ExpansionPanelActions, Toolbar,AppBar, Button, Card, CardContent, Icon, ExpansionPanel, ExpansionPanelDetails, ExpansionPanelSummary, Typography} from '@material-ui/core';
 import {FuseScrollbars, FuseAnimateGroup} from '@fuse';
-import {withRouter} from 'react-router-dom';
+import {withRouter,Link} from 'react-router-dom';
 import {makeStyles} from '@material-ui/styles';
 import _ from '@lodash';
 import * as Actions from '../store/actions';
@@ -58,17 +58,23 @@ const useStyles = makeStyles(theme => ({
     expanded: {
         
     },
-    
+    buttonlink: {
+        margin: theme.spacing(1),
+        color: 'inherit',
+        "&:visited, &:hover ,&:active": {
+            color:'inherit'
+        }
+    } 
 }));
 
 
-const MajlesTypeTest = () =>  {
-
-    const dispatch = useDispatch();
-    const majlestype =  useSelector(({majlestypeApp}) => majlestypeApp.majlestype.data);
-    const searchText = useSelector(({majlestypeApp}) => majlestypeApp.majlestype.searchText);
+function MajlesTypes(props) {
+    const {history } = props;
+    // const dispatch = useDispatch();
+    const majlestypes =  useSelector(({majlestypesApp}) => majlestypesApp.majlestypes.data);
+    const searchText = useSelector(({majlestypesApp}) => majlestypesApp.majlestypes.searchText);
     const classes = useStyles();
-    const [data, setData] = useState(majlestype);
+    const [data, setData] = useState(majlestypes);
     const [expanded, setExpanded] = useState(null);
 
 
@@ -77,8 +83,8 @@ const MajlesTypeTest = () =>  {
     // }, [dispatch]);
 
     useEffect(() => {
-        setData(searchText.length === 0 ? majlestype : _.filter(majlestype, item => item.type.includes(searchText)))
-    }, [majlestype, searchText]);
+        setData(searchText.length === 0 ? majlestypes : _.filter(majlestypes, item => item.type.includes(searchText)))
+    }, [majlestypes, searchText]);
 
     const toggleExpansion = panel => (event, expanded) => {
         setExpanded(expanded ? panel : false);
@@ -86,15 +92,10 @@ const MajlesTypeTest = () =>  {
         // '#d1ea52'        
         
     };
-    const [color, setColor] = React.useState('default');
-
-    const handleChange = event => {
-        if (expanded){
-            event.style = { 
-                background: '#edf5ba'
-            }
-        }
-        };
+   
+    function handleClick(item){
+        history.push('/admin/majlestypes/' + item.id + '/' + item.type);
+    }
 
     return (
     <div className="w-full flex flex-col">
@@ -112,11 +113,11 @@ const MajlesTypeTest = () =>  {
                     <FuseAnimateGroup
                         enter={{
                             animation: "transition.slideUpBigIn"
-                        }}
-                    >
-                        {useMemo(() => {
-                            return data.map((type) => (
-
+                        }}>
+                      
+                            {/* {useMemo(() => { */}
+                            {_.orderBy(data)
+                            .map(type => (
                                 <ExpansionPanel 
                                     classes={{
                                         root    : classes.panel,
@@ -129,7 +130,7 @@ const MajlesTypeTest = () =>  {
                                     className='flex-grow overflow-x-auto'
                                 >
 
-                                    <ExpansionPanelSummary onChange={handleChange}  expandIcon={<Icon>expand_more</Icon>}>
+                                    <ExpansionPanelSummary  expandIcon={<Icon>expand_more</Icon>}>
                                         <div className="flex items-center">
                                             {/* <Icon className="mr-12" color="action">class</Icon> */}
                                             <Typography id='Type' className="font-bold mb-4 text-15">{type.type}</Typography>
@@ -137,11 +138,24 @@ const MajlesTypeTest = () =>  {
                                     </ExpansionPanelSummary>
 
                                     <ExpansionPanelDetails style={{    backgroundColor: 'rgba(0, 0, 0, .03)',}}>
-                                            <TypeDetails id={ type.id } type={type.type} />
+                                          {  expanded === type.id? 
+                                            <TypeDetails typesId={ expanded }  />
+                                             : <Typography></Typography>
+                                             }
                                     </ExpansionPanelDetails>
                                     <Divider />
                                     <ExpansionPanelActions style={{    backgroundColor: 'rgba(0, 0, 0, .03)',}}>
-                                    <Button variant="outlined" color="primary" className={classes.button}>
+                                    {/* <Link 
+                                    className={classes.buttonlink} 
+                                    to="/admin/majlestypes/${item.id}/${item.type}" role="button">
+                                    <Icon>edit</Icon></Link> */}
+
+                                    <Button 
+                                    variant="outlined" 
+                                    color="primary" 
+                                    lassName={classes.button}
+                                    onClick={event => handleClick(type)}
+                                    >
                                         <Icon>edit</Icon>
                                     </Button>
                                     <Button variant="outlined" color="default" className={classes.button}>
@@ -149,8 +163,8 @@ const MajlesTypeTest = () =>  {
                                     </Button>
                                     </ExpansionPanelActions>
                                 </ExpansionPanel>
-                            ))
-                        }, [data, classes, expanded])}
+                                ))}
+                            {/* )}, [data, classes.panel, classes.expanded, classes.button, expanded, handleClick])} */}
                     </FuseAnimateGroup>
             </div>
     
@@ -159,4 +173,4 @@ const MajlesTypeTest = () =>  {
    );
 }
 
-export default withRouter(MajlesTypeTest);
+export default withRouter(MajlesTypes);

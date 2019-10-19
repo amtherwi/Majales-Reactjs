@@ -7,24 +7,24 @@ import withReducer from 'app/store/withReducer';
 import * as Actions from './store/actions'
 import reducer from './store/reducers';
 
-import MajlesTypeTable from './components/MajlesTypeTable';
-import MajlesTypeHeader from './components/MajlesTypeHeader';
-import MajlesTypeTest from './components/MajlesTypeTest'
+// import MajlesTypeTable from './components/MajlesTypeTable';
+import MajlesTypesHeader from './components/MajlesTypesHeader';
+import MajlesTypes from './components/MajlesTypes'
 
-function MajlesTypeApp()
+function MajlesTypesApp()
 {
     const dispatch = useDispatch();
-    const majlestype = useSelector(({majlestypeApp}) => majlestypeApp.majlestype);
+    const majlestypes = useSelector(({majlestypesApp}) => majlestypesApp.majlestypes);
 
     useEffect(() => {
         dispatch(Actions.getMajlesTypes());
     }, [dispatch]);
 
-    if ( !majlestype )
+    if ( !majlestypes )
     {
         return null;
     }else{
-        console.log('majlesTypes is: ',majlestype);
+        console.log('majlesTypes is: ',majlestypes);
     }
 
     return (
@@ -34,14 +34,14 @@ function MajlesTypeApp()
                 header : "min-h-72 h-72 sm:h-136 sm:min-h-136"
             }}
             header={
-                <MajlesTypeHeader/>
+                <MajlesTypesHeader/>
             }
             content={
-                <MajlesTypeTest/>
+                <MajlesTypes />
             }
             innerScroll
         />
     );
 }
 
-export default withReducer('majlestypeApp', reducer)(MajlesTypeApp);
+export default withReducer('majlestypesApp', reducer)(MajlesTypesApp);
