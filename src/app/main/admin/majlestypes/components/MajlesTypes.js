@@ -69,13 +69,14 @@ const useStyles = makeStyles(theme => ({
 
 
 function MajlesTypes(props) {
-    const {history } = props;
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const majlestypes =  useSelector(({majlestypesApp}) => majlestypesApp.majlestypes.data);
     const searchText = useSelector(({majlestypesApp}) => majlestypesApp.majlestypes.searchText);
     const classes = useStyles();
     const [data, setData] = useState(majlestypes);
     const [expanded, setExpanded] = useState(null);
+    
+    
 
 
     // useEffect(() => {
@@ -93,14 +94,18 @@ function MajlesTypes(props) {
         
     };
    
-    function handleClick(item){
-        history.push('/admin/majlestypes/' + item.id + '/' + item.type);
+    function handleUpdate(item){
+        props.history.push('/admin/majlestypes/' + item.id + '/' + item.type);
+    }
+
+    function handelDelete(item){
+
     }
 
     return (
     <div className="w-full flex flex-col">
         <FuseScrollbars className="flex-grow overflow-x-auto w-full">
-            <div className="flex flex-col flex-1 flex-shrink-0 max-w-xl w-full mx-auto px-16 sm:px-24 py-24 sm:py-32">
+            {/* <div className="flex flex-col flex-1 flex-shrink-0 max-w-xl w-full mx-auto px-16 sm:px-24 py-24 sm:py-32"> */}
                     {
                         (data.length === 0) && (
                             <div className="flex flex-auto items-center justify-center w-full h-full">
@@ -123,7 +128,7 @@ function MajlesTypes(props) {
                                         root    : classes.panel,
                                         expanded: classes.expanded
                                     }}
-                                    key={type.id}
+                                    // key={type.id}
                                     expanded={expanded === type.id}
                                     onChange={toggleExpansion(type.id)}
                                     elevation={0}
@@ -151,14 +156,20 @@ function MajlesTypes(props) {
                                     <Icon>edit</Icon></Link> */}
 
                                     <Button 
+                                    // key={type.id}
                                     variant="outlined" 
                                     color="primary" 
                                     lassName={classes.button}
-                                    onClick={event => handleClick(type)}
+                                    onClick={event => handleUpdate(type)}
                                     >
                                         <Icon>edit</Icon>
                                     </Button>
-                                    <Button variant="outlined" color="default" className={classes.button}>
+                                    <Button  
+                                    variant="outlined" 
+                                    color="default" 
+                                    className={classes.button}
+                                    onClick={event => handelDelete(type)}
+                                    >
                                         <Icon>delete</Icon>
                                     </Button>
                                     </ExpansionPanelActions>
@@ -166,7 +177,7 @@ function MajlesTypes(props) {
                                 ))}
                             {/* )}, [data, classes.panel, classes.expanded, classes.button, expanded, handleClick])} */}
                     </FuseAnimateGroup>
-            </div>
+            {/* </div> */}
     
       </FuseScrollbars>
     </div>

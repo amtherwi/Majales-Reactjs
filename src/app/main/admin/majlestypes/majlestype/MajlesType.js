@@ -34,92 +34,67 @@ const MajlesType = (props) => {
   const dispatch = useDispatch();
   // const product = useSelector(({eCommerceApp}) => eCommerceApp.product);
 
-   const [tabValue, setTabValue] = useState(0);
+//    const [tabValue, setTabValue] = useState(0);
    const {form, handleChange, setForm} = useForm(null);
     const classes = useStyles();
     const [data, setData] = useState({});
-    const [hasError, setError] = useState(false);
-    // const majlestype =  useSelector(({majlestypeApp}) => majlestypeApp.cl.data);
-
-    // const [expanded, setExpanded] = useState(null);
+    // const [hasError, setError] = useState(false);
+    // const majlestype =  useSelector(({majlestypesApp}) => majlestypesApp);
     
-    // const {majlesTypeId} = props;
-    useEffect(() => {
-        function getCalssificationData()
-        {
-          dispatch(Actions.getCalssification(props.match.params))
-          .then(data => setData(data.payload)) 
-          .catch(err => setError(err));
-        }
-        getCalssificationData();
-    }, [dispatch, props.match.params]);
-
-    function createData(role, inCost, outCost) {
-        return { role, inCost, outCost };
-      }
-      console.log('data is',data);
-      
-      const rows = [
-
-        createData('الرئيس', data.ceO_inCost, data.ceO_outCost),
-        createData('الأمين', data.sec_inCost, data.sec_outCost),
-        createData('السكرتير', data.mSec_inCost, data.mSec_outCost),
-        createData('الأعضاء', data.mem_inCost, data.mem_outCost),
-       
-      ];
-     
+    const {type,id} = props.match.params
+    
   useEffect(() => {
       function updateMajleType()
       {
-          const params = props.match.params;
-          const {id} = params;
-
+        const params = props.match.params
+        const {id} = params;
           if ( id === 'new' )
           {
               dispatch(Actions.newMajlesType());
-          }
+            //   setForm(null)
+           }
           else
           {
-              dispatch(Actions.getCalssification(props.match.params));
+              dispatch(Actions.getCalssification(id))
+              .then(data => setData(data.payload)) 
           }
+
       }
 
       updateMajleType();
-  }, [dispatch, props.match.params]);
+  }, [dispatch, id, props.match.params]);
 
-  useEffect(() => {
-      if (
-          (data && !form) ||
-          (data && form && data.id !== form.id)
-      )
-      {
-          setForm(data);
-      }
+
+   useEffect(() => {
+    if (
+        (data && !form) ||
+        (data && form && data.id !== form.id)
+    )
+    {
+      //   const filteredDate = data.map(x => x.majlesType.type === type )
+        setForm(data);
+    }
+      
   }, [form, data, setForm]);
 
-//   function handleChangeTab(event, tabValue)
-//   {
-//       setTabValue(tabValue);
-//   }
+  
+  if(form && form.majlesType){
+      
+        console.log('form is : ',form);
+        // var typpe = form.majlesType.type;
+      
+    
+    }
 
-//   function handleChipChange(value, name)
-//   {
-//       setForm(_.set({...form}, name, value.map(item => item.value)));
-//   }
-
-  // function setFeaturedImage(id)
-  // {
-  //     setForm(_.set({...form}, 'featuredImageId', id));
-  // }
 
   function canBeSubmitted()
   {
       return (
-          form.length > 0 &&
+        //   type > 0 &&
           !_.isEqual(data, form)
       );
   }
-
+//   console.log('Can be Submitted : ',canBeSubmitted())
     return (
       <FusePageCarded
       classes={{
@@ -138,18 +113,28 @@ const MajlesType = (props) => {
                               التصنيفات
                           </Typography>
                       </FuseAnimate>
-
+                      
                       <div className="flex items-center max-w-full">
+                      {form.majlesType ? 
                           <FuseAnimate animation="transition.expandIn" delay={300}>
-                              
-                            <img className=" p-2 w-30 sm:w-48 mr-8 sm:mr-16 rounded" 
+                           <Icon className="text-32 mr-0 sm:mr-12">
+                           account_balance
+                           </Icon>
+                           </FuseAnimate>
+                           : 
+                           <FuseAnimate animation="transition.expandIn" delay={300}>
+                           <Icon className="text-32 mr-0 sm:mr-12">
+                           account_balance_wallet
+                           </Icon>
+                           </FuseAnimate>
+                           }   
+                            {/* <img className=" p-2 w-30 sm:w-48 mr-8 sm:mr-16 rounded" 
                             src="assets/images/ecommerce/product-image-placeholder.png" alt={form.type}/>
-                             
-                          </FuseAnimate>
+                              */}
                           <div className="flex flex-col min-w-0">
                               <FuseAnimate animation="transition.slideLeftIn" delay={300}>
                                   <Typography className="text-16 sm:text-20 truncate">
-                                      {form.type ? form.type : 'اضافة جديد'}
+                                      {form.majlesType ? form.majlesType.type : 'اضافة جديد'}
                                   </Typography>
                               </FuseAnimate>
                               {/* <FuseAnimate animation="transition.slideLeftIn" delay={300}>
@@ -163,7 +148,7 @@ const MajlesType = (props) => {
                           className="whitespace-no-wrap"
                           variant="contained"
                           disabled={!canBeSubmitted()}
-                          onClick={() => dispatch(Actions.saveMajlesType(form))}
+                          onClick={() => dispatch(Actions.saveMajlesType(form,id))}
                       >
                           حفظ
                       </Button>
@@ -173,19 +158,19 @@ const MajlesType = (props) => {
       }
     
       content={ 
-          form && (
-            <div className={classes.root}>
+        form && (
+            <div >
             <FuseAnimate>
                 <Paper className={classes.paper}>
                 <TextField
                     className="mt-8 mb-16"
-                    error={form.type === ''}
+                    error={form.majlesType === ''}
                     required
                     label="نوع المجلس"
                     autoFocus
-                    id="type"
-                    name="type"
-                    value={form.type}
+                    id='majlesType'
+                    name='majlesType'
+                    value={form.majlesType?  form.majlesType.type : form.majlesType}
                     onChange={handleChange}
                     variant="outlined"
                     
@@ -193,6 +178,8 @@ const MajlesType = (props) => {
                 
                 </Paper>
             </FuseAnimate>
+            
+           
             <Grid item xs={12} variant="subtitle1" color="inherit">
                 
                     <Paper  className={classes.paper} style={{    backgroundColor: 'rgba(0, 1, 0, .03)',padding:'70'}}>
@@ -207,19 +194,8 @@ const MajlesType = (props) => {
                     <Table >
                        
                         <TableBody>
-                        {/* <TableRow >
-                            <TableCell align="center" component="th" className='font-bold mb-4 text-15'>
-                             العضوية 
-                            </TableCell>
-                            <TableCell align="center" component="th" className='font-bold mb-4 text-15'>
-                            وقت الدوام 
-                            </TableCell>
-                            <TableCell align="center" component="th" className='font-bold mb-4 text-15'>
-                            خارج الدوام 
-                            </TableCell>
-                        </TableRow> */}
                         
-                            <TableRow key={form.id}>
+                            <TableRow>
                                 <TableCell className='text-16' align="center" scope="row">
                                     الرئيس  
                                 </TableCell>
@@ -255,7 +231,7 @@ const MajlesType = (props) => {
                                     />
                                 </TableCell>
                             </TableRow>
-                            <TableRow key={form.id}>
+                            <TableRow >
                                 <TableCell className='text-16' align="center" scope="row">
                                      الأمين 
                                 </TableCell>
@@ -291,7 +267,7 @@ const MajlesType = (props) => {
                                     />
                                 </TableCell>
                             </TableRow>
-                            <TableRow key={form.id}>
+                            <TableRow >
                                 <TableCell className='text-16' align="center" scope="row">
                                      السكرتير 
                                 </TableCell>
@@ -327,7 +303,7 @@ const MajlesType = (props) => {
                                     />
                                 </TableCell>
                             </TableRow>
-                            <TableRow key={form.id}>
+                            <TableRow >
                                 <TableCell className='text-16' align="center" scope="row">
                                      العضو 
                                 </TableCell>
@@ -370,9 +346,9 @@ const MajlesType = (props) => {
                     {/* </Paper> */}
                 </FuseAnimate>
                 </Grid>
-               
+                
         </div>
-          )
+         )
       }
       innerScroll
       />    
