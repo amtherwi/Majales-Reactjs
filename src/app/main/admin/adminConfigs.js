@@ -1,7 +1,7 @@
 import { MembersAppConfig } from './members/MembersAppConfig';
 import { MajalesAppConfig } from './majales/MajalesAppConfig';
 import { CategoryAppConfig } from './category/MembersAppConfig';
-import { MajlesTypeAppConfig } from './majlestype/MajlesTypeAppConfig';
+import { MajlesTypesAppConfig } from './majlestypes/MajlesTypesAppConfig';
 
 
 
@@ -10,5 +10,5 @@ export const adminConfigs = [
     MembersAppConfig,
     MajalesAppConfig,
     CategoryAppConfig,
-    MajlesTypeAppConfig
+    MajlesTypesAppConfig
 ];

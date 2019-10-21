@@ -52,43 +52,27 @@ const navigationConfig = [
                 ]
             },
             {
-                'id'      : 'category',
-                'title'   : 'التصنيفات',
-                'type'    : 'collapse',
-                'icon'    : 'category',
-                'children': [
-                    {
-                        'id'   : 'view-categories',
-                        'title': 'عرض التصنيفات',
-                        'type' : 'item',
-                        'url'  : '/admin/category/all'
-                    },
-                    {
-                        'id'   : 'add-category',
-                        'title': 'إضافة تصنيف',
-                        'type' : 'item',
-                        'url'  : '/admin/category/add'
-                    }
-                ]
-            },
-            {
-                'id'      : 'majlestype',
+                'id'      : 'majlestypes',
                 'title'   : 'تصنيفات المجالس',
                 'type'    : 'collapse',
                 'icon'    : 'category',
                 'children': [
                     {
-                        'id'   : 'view-majletype',
+                        'id'   : 'view-majlestypes',
                         'title': 'عرض التصنيفات',
                         'type' : 'item',
-                        'url'  : '/admin/majlestype/all'
+                        'url'  : '/admin/majlestypes',
+                        'exact': true
                     },
                     {
-                        'id'   : 'add-majlestype',
+                        'id'   : 'new-majlestypes',
                         'title': 'إضافة تصنيف',
                         'type' : 'item',
-                        'url'  : '/admin/majlestype/add'
+                        'url'  : '/admin/majlestypes/new',
+                         'exact': true
                     }
+                   
+                    
                 ]
             },
             {
