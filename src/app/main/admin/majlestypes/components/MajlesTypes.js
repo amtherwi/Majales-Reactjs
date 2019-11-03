@@ -1,35 +1,25 @@
-import React, {useEffect, useState, useMemo} from 'react';
-import {Divider,ExpansionPanelActions, Toolbar,AppBar, Button, Card, CardContent, Icon, ExpansionPanel, ExpansionPanelDetails, ExpansionPanelSummary, Typography} from '@material-ui/core';
+import React, {useEffect, useState} from 'react';
+import {Divider,ExpansionPanelActions, Button,IconButton, Icon, ExpansionPanel, 
+        ExpansionPanelDetails, ExpansionPanelSummary, Typography} from '@material-ui/core';
 import {FuseScrollbars, FuseAnimateGroup} from '@fuse';
-import {withRouter,Link} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import {makeStyles} from '@material-ui/styles';
 import _ from '@lodash';
 import * as Actions from '../store/actions';
 import {useDispatch, useSelector} from 'react-redux';
 import TypeDetails from './TypeDetails';
-import MuiExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import { red } from '@material-ui/core/colors';
+import LeftSideLayout1 from 'app/fuse-layouts/layout1/components/LeftSideLayout1';
+// import MuiExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+// import { red } from '@material-ui/core/colors';
 
-// const ExpansionPanelSummary = withStyles({
-//     root: {
-//       backgroundColor: 'rgba(0, 0, 0, .03)',
-//       borderBottom: '1px solid rgba(0, 0, 0, .125)',
-//       marginBottom: -1,
-//       minHeight: 56,
-//       '&$expanded': {
-//         minHeight: 56,
-//       },
-//     },
-//     content: {
-//       '&$expanded': {
-//         margin: '12px 0',
-//       },
-//     },
-//     expanded: {},
-//   })(MuiExpansionPanelSummary);
 const useStyles = makeStyles(theme => ({
+    root: {
+        width: '100%',
+      },
     header  : {
-        background: 'linear-gradient(to right, ' + theme.palette.primary.dark + ' 50%, ' + theme.palette.primary.main + ' 100%)',
+        background: 'linear-gradient(to right, ' + 
+                    theme.palette.primary.dark + ' 50%, ' + 
+                    theme.palette.primary.main + ' 100%)',
         color     : theme.palette.primary.contrastText
     },
     button: {
@@ -64,7 +54,21 @@ const useStyles = makeStyles(theme => ({
         "&:visited, &:hover ,&:active": {
             color:'inherit'
         }
-    } 
+    },
+    heading: {
+        fontSize: theme.typography.pxToRem(15),
+        flexBasis: '33.33%',
+        flexShrink: 0,
+        display: 'flex',
+        alignItems: 'center',
+      },
+    secondaryHeading: {
+        fontSize: theme.typography.pxToRem(15),
+        color: theme.palette.text.secondary,
+        alignItems: 'center',
+        paddingInline:'400px'
+        
+    },
 }));
 
 
@@ -74,8 +78,9 @@ function MajlesTypes(props) {
     const searchText = useSelector(({majlestypesApp}) => majlestypesApp.majlestypes.searchText);
     const classes = useStyles();
     const [data, setData] = useState(majlestypes);
-    const [expanded, setExpanded] = useState(null);
-    
+    const [expanded, setExpanded] = useState(false);
+    const [ishidden, setIsHidden] = useState(true);
+
     
 
 
@@ -89,7 +94,7 @@ function MajlesTypes(props) {
 
     const toggleExpansion = panel => (event, expanded) => {
         setExpanded(expanded ? panel : false);
-       
+        setIsHidden(true)
         // '#d1ea52'        
         
     };
@@ -97,15 +102,18 @@ function MajlesTypes(props) {
     function handleUpdate(item){
         props.history.push('/admin/majlestypes/' + item.id + '/' + item.type);
     }
-
-    function handelDelete(item){
-
-    }
-
+    
+        function handelDelete(item)
+        {
+          const {id} = item;
+         
+         dispatch(Actions.deleteMajlesType(id))
+                 
+        }
+     
     return (
-    <div className="w-full flex flex-col">
-        <FuseScrollbars className="flex-grow overflow-x-auto w-full">
-            {/* <div className="flex flex-col flex-1 flex-shrink-0 max-w-xl w-full mx-auto px-16 sm:px-24 py-24 sm:py-32"> */}
+    <div className="w-full flex  ">
+        <FuseScrollbars className="  w-full">
                     {
                         (data.length === 0) && (
                             <div className="flex flex-auto items-center justify-center w-full h-full">
@@ -119,47 +127,66 @@ function MajlesTypes(props) {
                         enter={{
                             animation: "transition.slideUpBigIn"
                         }}>
-                      
-                            {/* {useMemo(() => { */}
+                    
                             {_.orderBy(data)
                             .map(type => (
+                                
                                 <ExpansionPanel 
                                     classes={{
                                         root    : classes.panel,
                                         expanded: classes.expanded
                                     }}
-                                    // key={type.id}
+                                    key={type.id}
                                     expanded={expanded === type.id}
                                     onChange={toggleExpansion(type.id)}
                                     elevation={0}
-                                    className='flex-grow overflow-x-auto'
+                                    className='flex-grow'
+                                    
                                 >
-
-                                    <ExpansionPanelSummary  expandIcon={<Icon>expand_more</Icon>}>
-                                        <div className="flex items-center">
-                                            {/* <Icon className="mr-12" color="action">class</Icon> */}
-                                            <Typography id='Type' className="font-bold mb-4 text-15">{type.type}</Typography>
+                                    <ExpansionPanelSummary expanded={()=>setIsHidden(false)}
+                                        expandIcon={<Icon>expand_more</Icon>}
+                                        aria-controls={`${type.id}-content`}
+                                        id={`${type.id}-header`}
+                                    >
+                                        {/* <div className="flex items-center"> */}
+                                            <Typography id='Type' className={classes.heading}>{type.type}</Typography>
+                                            <div hidden={ishidden} className={classes.secondaryHeading}>
+                                            <IconButton 
+                                                // key={type.id}
+                                                // variant="outlined" 
+                                                // color="primary" 
+                                                // className={classes.button}
+                                                className={classes.secondaryHeading}
+                                                onClick={event => handleUpdate(type)}
+                                                >
+                                                    <Icon>edit</Icon>
+                                            </IconButton> 
+                                             <IconButton  
+                                                // variant="outlined" 
+                                                // color="default" 
+                                                // className={classes.button}
+                                                onClick={event => handelDelete(type)}
+                                                >
+                                                    <Icon>delete</Icon>
+                                                </IconButton> 
+                                                {/* </div> */}
                                         </div>
                                     </ExpansionPanelSummary>
 
-                                    <ExpansionPanelDetails style={{    backgroundColor: 'rgba(0, 0, 0, .03)',}}>
-                                          {  expanded === type.id? 
+                                    <ExpansionPanelDetails  style={{    backgroundColor: 'rgba(0, 0, 0, .03)',}}>
+                                          {  expanded == type.id? 
                                             <TypeDetails typesId={ expanded }  />
                                              : <Typography></Typography>
-                                             }
+                                            }
                                     </ExpansionPanelDetails>
                                     <Divider />
                                     <ExpansionPanelActions style={{    backgroundColor: 'rgba(0, 0, 0, .03)',}}>
-                                    {/* <Link 
-                                    className={classes.buttonlink} 
-                                    to="/admin/majlestypes/${item.id}/${item.type}" role="button">
-                                    <Icon>edit</Icon></Link> */}
-
+                                   
                                     <Button 
                                     // key={type.id}
                                     variant="outlined" 
                                     color="primary" 
-                                    lassName={classes.button}
+                                    className={classes.button}
                                     onClick={event => handleUpdate(type)}
                                     >
                                         <Icon>edit</Icon>
@@ -175,10 +202,7 @@ function MajlesTypes(props) {
                                     </ExpansionPanelActions>
                                 </ExpansionPanel>
                                 ))}
-                            {/* )}, [data, classes.panel, classes.expanded, classes.button, expanded, handleClick])} */}
-                    </FuseAnimateGroup>
-            {/* </div> */}
-    
+                    </FuseAnimateGroup>    
       </FuseScrollbars>
     </div>
    );

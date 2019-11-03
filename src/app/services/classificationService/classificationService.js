@@ -5,7 +5,7 @@ class classificationService extends FuseUtils.EventEmitter {
 
     getClassifyByMajlesType = (id) => {
         return new Promise((resolve, reject) => {
-            axios.get('http://localhost:21021/api/services/app/Classification/GetClassificationByMajlieTypeId',{
+            axios.get('http://localhost:21021/api/services/app/Classification/GetClassificationByMajlesTypeId',{
                 params: {
                     id
                 }
@@ -58,13 +58,32 @@ class classificationService extends FuseUtils.EventEmitter {
                 });
         });
     }
+    // createMajlesType = (majlestype) => {
+    //     return new Promise((resolve, reject) => {
+    //         axios.post('http://localhost:21021/api/services/app/MajlesType/Create', majlestype)
+    //             .then(response => {
+    //                 if ( response.data.success )
+    //                 {
+    //                     resolve(response.data.result);
+    //                 }
+    //                 else
+    //                 {
+    //                     reject(response.data.error);
+    //                 }
+    //             });
+    //     });
+    // };
 
     createClassification = (classification) => {
+        
+        console.log("inside service",classification);
+        
         return new Promise((resolve, reject) => {
             axios.post('http://localhost:21021/api/services/app/Classification/Create', classification)
                 .then(response => {
                     if ( response.data.success )
                     {
+
                         resolve(response.data.result);
                     }
                     else
@@ -102,7 +121,7 @@ class classificationService extends FuseUtils.EventEmitter {
                 .then(response => {
                     if ( response.data.success )
                     {
-                        resolve("Majles was successfully deleted !! ");
+                        resolve(true);
                     }
                     else
                     {

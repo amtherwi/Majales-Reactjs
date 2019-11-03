@@ -1,82 +1,78 @@
-import  classificationService  from 'app/services/classificationService'
 import  majlestypeService  from 'app/services/majlestypeService'
+import { getMajlesTypes } from './majlestypes.actions'
 import {showMessage} from 'app/store/actions/fuse';
 import {FuseUtils} from '@fuse';
-export const GET_CLASSIFICATION = '[CLASSIFICATION APP] GET CLASSIFICATION';
-export const GET_MAJLESTYPE     = '[MAJLESTYPES APP] GET MAJLESTYPES';
-export const SAVE_MAJLESTYPE = '[MAJLESTYPE APP] SAVE MAJLESTYPE';
+import {saveClassification} from './classification.actions'
 
-export function getCalssification(params)
+export const GET_MAJLESTYPE     = '[MAJLESTYPES APP] GET MAJLESTYPE';
+export const SAVE_MAJLESTYPE = '[MAJLESTYPES APP] SAVE MAJLESTYPE';
+export const DELETE_MAJLESTYPE     = '[MAJLESTYPES APP] DELETE MAJLESTYPE';
+
+export function getMajlesTypeById(params)
 {
-
-     return (dispatch) =>
-     classificationService.getClassifyByMajlesType(params)
-        .then((classification) =>
+    return (dispatch) =>
+     majlestypeService.getMajlesTypeById(params).then( (majlestype) =>
              dispatch({
-                 type   : GET_CLASSIFICATION,
-                 payload: classification
+                 type   : GET_MAJLESTYPE,
+                 payload: majlestype
              })
          );
-
 }
-export function saveMajlesType(data, majlesTypeId)
-{
-    // const request = axios.post('/api/e-commerce-app/product/save', data);
-    let majleTypeObj = {
-        type: data.majlesType
-    }
-    let typeCalssification = {
-        majlesTypeId      : majlesTypeId,
-        CEO_inCost      : data.CEO_inCost,
-        CEO_outCost     : data.CEO_outCost,
-        Sec_inCost      : data.Sec_inCost,
-        Sec_outCost     : data.Sec_outCost, 
-        MSec_inCost     : data.MSec_inCost,   
-        MSec_outCost    : data.MSec_outCost,
-        Mem_incost      : data.Mem_incost,
-        Mem_outCost     : data.Mem_outCost,
-    }
-    console.log("majlesType", majleTypeObj)
-    console.log("TypeClassification", typeCalssification)
 
+export function getMajlesType(params)
+{
+    return (dispatch) =>
+     majlestypeService.getMajlesTypeByType(params)
+     .then((majlestype) =>
+     {
+        return dispatch({
+                 type   : GET_MAJLESTYPE,
+                 payload: majlestype
+             })
+    });
+            
+}
+export function deleteMajlesType(params)
+{
+    return (dispatch) =>
+     majlestypeService.deleteMajlesType(params)
+     .then( (deleted) =>{
+            if(deleted){
+                dispatch(showMessage({message: ' تم الحذف بنجاح '}))
+            }
+        }  
+         ).then(() => dispatch(getMajlesTypes()))
+         .catch( err =>{dispatch(showMessage({message: 'لم يتم الحذف'})); });
+}
+
+export function saveMajlesType(data,majlesTypeId)
+{
+  
     if(majlesTypeId === 'new')
     {
-    console.log("inside majlesType", majleTypeObj)
-    console.log("inside TypeClassification", typeCalssification)
-     return (dispatch) =>  
-     majlestypeService.createMajlesType(majleTypeObj)
+     return (dispatch) => {
+     majlestypeService.createMajlesType(data)
             .then((majlestype) => 
             {
-                // classificationService.createClassification(typeCalssification)
-                // .then((classification) => {
-                //     dispatch(showMessage({message: 'تم الحفظ بنجاح'}))
-                // })
-                dispatch(showMessage({message: 'تم الحفظ بنجاح'}))
+                dispatch(showMessage({message: 'تم حفظ نوع المجلس بنجاح'}))
                 return dispatch({
                     type   : SAVE_MAJLESTYPE,
-                    payload: majlestype
-                });
-                 
+                     payload: majlestype
+                });          
             }
         )
-        .catch( err =>{dispatch(showMessage({message: 'لم يتم الحفظ'})); })
+        .catch( err =>{dispatch(showMessage({message: 'لم يتم الحفظ'})); });
+        
+        
+        }
     }
 }
-
+// .then(() => dispatch(getContacts(routeParams)))
 export function newMajlesType()
 {
     const data = {
-        id              : FuseUtils.generateGUID(),
-        majlesType     : '',
-        CEO_inCost      : 0,
-        CEO_outCost     : 0,
-        Sec_inCost      : 0,
-        Sec_outCost     : 0, 
-        MSec_inCost     : 0,   
-        MSec_outCost    : 0,
-        Mem_incost      : 0,
-        Mem_outCost     : 0,
-        
+       // id  : FuseUtils.generateGUID(),
+        type: ''   
     };
 
     return {

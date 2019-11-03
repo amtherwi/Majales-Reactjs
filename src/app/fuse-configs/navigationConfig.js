@@ -59,9 +59,16 @@ const navigationConfig = [
                 'children': [
                     {
                         'id'   : 'view-majlestypes',
-                        'title': 'عرض التصنيفات',
+                        'title': 'أنواع المجالس',
                         'type' : 'item',
                         'url'  : '/admin/majlestypes',
+                        'exact': true
+                    },
+                    {
+                        'id'   : 'view-classifications',
+                        'title': 'عرض التصنيفات',
+                        'type' : 'item',
+                        'url'  : '/admin/majlestypes/classifications',
                         'exact': true
                     },
                     {

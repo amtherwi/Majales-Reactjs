@@ -44,28 +44,43 @@ const TypeDetails = (props) => {
       {
         dispatch(Actions.getCalssification(typesId))
         .then(data => setData(data.payload)) 
-        .catch(err => setError(err));
+        .catch(hasError => setError(hasError));
       }
       getCalssificationData();
   }, [dispatch, typesId]);
   
+  function handleUpdate(item){
+    props.history.push('/admin/majlestypes/' + item.id + '/' + item.type);
+    }
+
+    function handelDelete()
+    {
+      
+      const Cid = data.id
+
+     dispatch(Actions.deleteMajlesType(typesId))
+     dispatch(Actions.deleteClassification(Cid))
+             
+    }
     
-    function createData(role, inCost, outCost) {
-        return { role, inCost, outCost };
+    function createData(id,role, inCost, outCost) {
+        return { id, role, inCost, outCost };
       }
       console.log('data is',data);
       const rows = [
 
-        createData('الرئيس', data.ceO_inCost, data.ceO_outCost),
-        createData('الأمين', data.sec_inCost, data.sec_outCost),
-        createData('السكرتير', data.mSec_inCost, data.mSec_outCost),
-        createData('الأعضاء', data.mem_inCost, data.mem_outCost),
+        createData(data.id,'الرئيس', data.ceO_inCost, data.ceO_outCost),
+        createData(data.id+1,'الأمين', data.sec_inCost, data.sec_outCost),
+        createData(data.id+2,'السكرتير', data.mSec_inCost, data.mSec_outCost),
+        createData(data.id+3,'الأعضاء', data.mem_inCost, data.mem_outCost),
        
       ];
      
     return (
+       
         <div className={classes.root}>
-            <Grid container spacing={4}>
+            { data.id ? 
+              <Grid container spacing={4}>
                 <Grid item xs={12} variant="subtitle1" color="inherit">
                     <Paper  className={classes.paper} style={{    backgroundColor: 'rgba(0, 1, 0, .03)',}}>
                     <Typography className='font-bold mb-4 text-15'>مستحقات الأعضاء</Typography>
@@ -104,8 +119,37 @@ const TypeDetails = (props) => {
                     </Table>
                     {/* </Paper> */}
                 </Grid>
+                {/* <Grid>
+                <Button 
+                                    // key={type.id}
+                        variant="outlined" 
+                        color="primary" 
+                        className={classes.button}
+                        onClick={event => handleUpdate()}
+                        >
+                            <Icon>edit</Icon>
+                        </Button>
+                        <Button  
+                        variant="outlined" 
+                        color="default" 
+                        className={classes.button}
+                        onClick={event => handelDelete()}
+                        >
+                            <Icon>delete</Icon>
+                        </Button>
+                </Grid> */}
           
             </Grid>
+      
+            :
+            <div className="flex flex-auto items-center justify-center w-full h-full">
+                                <Typography color="textSecondary" variant="h5">
+                                    لا يوجد تصنيفات  !!
+                                </Typography>
+                            </div>
+                      
+                       }
+            
             
         </div>
     );

@@ -4,6 +4,10 @@ import classificationService from 'app/services/classificationService'
 // import {FuseUtils} from '@fuse';
 export const GET_MAJLESTYPES = '[MAJLESTYPES APP] GET MAJLESTYPES';
 export const SET_MAJALES_SEARCH_TEXT = '[MAJALES APP] SET MAJALES SEARCH TEXT';
+export const OPEN_NEW_MAJLESTYPE_DIALOG = '[MAJLESTYPE APP] OPEN NEW MAJLESTYPE DIALOG';
+export const CLOSE_NEW_MAJLESTYPE_DIALOG = '[MAJLESTYPE APP] CLOSE NEW MAJLESTYPE DIALOG';
+export const OPEN_EDIT_MAJLESTYPE_DIALOG = '[MAJLESTYPE APP] OPEN EDIT MAJLESTYPE DIALOG';
+export const CLOSE_EDIT_MAJLESTYPE_DIALOG = '[MAJLESTYPE APP] CLOSE EDIT MAJLESTYPE DIALOG';
 
 export function getMajlesTypes()
 {
@@ -18,17 +22,6 @@ export function getMajlesTypes()
 
 }
 
-export function getMajlesTypeById(params)
-{
-    return (dispatch) =>
-     majlestypeService.getMajlesTypeById(params).then( (majlestypes) =>
-             dispatch({
-                 type   : GET_MAJLESTYPES,
-                 payload: majlestypes
-             })
-         );
-}
-
 export function setSearchText(event)
 {
     return {
@@ -36,24 +29,6 @@ export function setSearchText(event)
         searchText: event.target.value
     }
 }
-
-
-
-
-
-    
-    // return (dispatch) =>
-    // majlestypeService.createMajlesType(data).then((majlestype) => 
-    //         {
-    //             dispatch(showMessage({message: 'تم الحفظ بنجاح'}));
-    //             return dispatch({
-    //                 type   : SAVE_MAJLESTYPE,
-    //                 payload: majlestype
-    //             })
-    //         }
-    //     )
-    //     .catch( err =>{dispatch(showMessage({message: 'لم يتم الحفظ'})); })
-
 
 
 
