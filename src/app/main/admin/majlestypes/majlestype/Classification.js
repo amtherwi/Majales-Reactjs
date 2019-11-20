@@ -44,7 +44,8 @@ function Classification(props){
         {
             const params = props.match.params
             const {id} = params;
-            if ( id === 'new' )
+          
+          if (classification === null)
             {
               dispatch(Actions.newClassification())
           
@@ -79,7 +80,7 @@ function Classification(props){
   
   const canBeSubmitted = () => {
       
-    return(form &&
+    return(
         !_.isEqual(classification.data, form));
       }
 
@@ -151,6 +152,7 @@ return (<FusePageCarded
                           </TableCell>
                           <TableCell className='text-16' align="right" scope="row">
                           <Button
+                              key={form.majlesTypeId}
                               className={classes.button}
                               variant="outlined" 
                               color="default" 
@@ -193,7 +195,8 @@ return (<FusePageCarded
                                                 value={form.ceO_inCost}
                                                 onChange={handleChange}
                                                 variant="outlined"
-                                                
+                                                type="number"
+
                                             />
                                         </TableCell>
                                         <TableCell >
@@ -208,6 +211,8 @@ return (<FusePageCarded
                                                 value={form.ceO_outCost}
                                                 onChange={handleChange}
                                                 variant="outlined"
+                                                type="number"
+
                                             />
                                         </TableCell>
                                     </TableRow>
@@ -227,6 +232,8 @@ return (<FusePageCarded
                                                 value={form.sec_inCost}
                                                 onChange={handleChange}
                                                 variant="outlined"
+                                                type="number"
+
                                                 
                                             />
                                         </TableCell>
@@ -242,6 +249,8 @@ return (<FusePageCarded
                                                 value={form.sec_outCost}
                                                 onChange={handleChange}
                                                 variant="outlined"
+                                                type="number"
+
                                             />
                                         </TableCell>
                                     </TableRow>
@@ -261,6 +270,8 @@ return (<FusePageCarded
                                                 value={form.mSec_inCost}
                                                 onChange={handleChange}
                                                 variant="outlined"
+                                                type="number"
+
                                                 
                                             />
                                         </TableCell>
@@ -276,6 +287,8 @@ return (<FusePageCarded
                                                 value={form.mSec_outCost}
                                                 onChange={handleChange}
                                                 variant="outlined"
+                                                type="number"
+
                                             />
                                         </TableCell>
                                     </TableRow>
@@ -295,6 +308,8 @@ return (<FusePageCarded
                                                 value={form.mem_inCost}
                                                 onChange={handleChange}
                                                 variant="outlined"
+                                                type="number"
+
                                                 
                                             />
                                         </TableCell>
@@ -310,6 +325,8 @@ return (<FusePageCarded
                                                 value={form.mem_outCost}
                                                 onChange={handleChange}
                                                 variant="outlined"
+                                                type="number"
+
                                             />
                                         </TableCell>
                                     </TableRow>

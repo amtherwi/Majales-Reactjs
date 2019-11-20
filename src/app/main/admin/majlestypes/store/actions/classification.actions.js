@@ -18,12 +18,12 @@ export function getCalssification(params)
          );
 
 }
-export function saveClassification(data,Id) {
+export function saveClassification(data,cId) {
   
-    if(Id === 'new')
-    {
+    //if(cId === 'new')
+    //{
         console.log('data in actionSave,',data)
-        console.log('form in majlesTypdId,',Id)
+        console.log('form in majlesTypdId,',cId)
      
         return (dispatch) => {
             classificationService.createClassification(data)
@@ -40,7 +40,7 @@ export function saveClassification(data,Id) {
      
             }
         
-    }
+    //}
 
 }
 export function deleteClassification(params)
@@ -60,14 +60,14 @@ export function newClassification()
     const data = {
         
         majlesTypeId    : 0,
-        CEO_inCost      : 0,
-        CEO_outCost     : 0,
-        Sec_inCost      : 0,
-        Sec_outCost     : 0, 
-        MSec_inCost     : 0,   
-        MSec_outCost    : 0,
-        Mem_inCost      : 0,
-        Mem_outCost     : 0,
+        ceO_inCost      : 0,
+        ceO_outCost     : 0,
+        sec_inCost      : 0,
+        sec_outCost     : 0, 
+        mSec_inCost     : 0,   
+        mSec_outCost    : 0,
+        mem_inCost      : 0,
+        mem_outCost     : 0,
         
     };
 

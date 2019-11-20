@@ -64,13 +64,13 @@ const navigationConfig = [
                         'url'  : '/admin/majlestypes',
                         'exact': true
                     },
-                    {
-                        'id'   : 'view-classifications',
-                        'title': 'عرض التصنيفات',
-                        'type' : 'item',
-                        'url'  : '/admin/majlestypes/classifications',
-                        'exact': true
-                    },
+                    // {
+                    //     'id'   : 'view-classifications',
+                    //     'title': 'عرض التصنيفات',
+                    //     'type' : 'item',
+                    //     'url'  : '/admin/majlestypes/classifications',
+                    //     'exact': true
+                    // },
                     {
                         'id'   : 'new-majlestypes',
                         'title': 'إضافة تصنيف',

@@ -40,7 +40,7 @@ function MajlesType(props){
     const {form, handleChange, setForm} = useForm(null);
     const [ishidden, setIsHidden] = useState(()=> id==='new'? true:false);
     const [mtdata, setMtData] = useState({});
-    // const [isDisabled, setIsDisabled] = useState(true);
+     const [editable, setEditable] = useState(false);
     
     useEffect(() => {
       function updateMajleType()
@@ -75,8 +75,11 @@ const handelSave = ()=> {
 
     const params = props.match.params
     const {id} = params;
-    dispatch(Actions.saveMajlesType(form,id))
-    setIsHidden(false); 
+    setIsHidden(false);
+    setEditable(true);
+
+    dispatch(Actions.saveMajlesType(form,id));
+   
     
 }
  
@@ -101,13 +104,7 @@ function handleClick()
         if(mtdata.id){
                     props.history.push('/admin/classifications/' + mtdata.id + '/' + mtdata.type);
         }
-        console.log('dataddd',mtdata)
-               
-        // dispatch(Actions.getMajlesType(type))
-        // .then((data) => {
-        //     setData(data)
-        // });
-        //props.history.push('/admin/classifications/' + data.id + '/' + data.type);
+        console.log('dataddd',mtdata) 
         } else{
             console.log('majlestype',majlestype)
             //if(majlestype. && majlestype.type){
@@ -115,8 +112,7 @@ function handleClick()
             console.log('id',id)
             console.log('type',type)
 
-            //props.history.push('/admin/classifications/' + id + '/' + type);
-           // }
+    
 
         }
 
@@ -190,7 +186,7 @@ function handleClick()
                                 value={form.type}
                                 onChange={handleChange}
                                 variant="outlined"
-                                // disabled={editable}
+                                disabled={editable}
                                 
                             />          
                         </TableCell>
