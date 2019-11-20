@@ -15,6 +15,10 @@ export const MajlesTypesAppConfig = {
             component: React.lazy(() => import('./majlestype/MajlesType'))
         },
         {
+            path     : '/admin/classifications/:id/:type?',
+            component: React.lazy(() => import('./majlestype/Classification'))
+        },
+        {
             path     : '/admin/majlestypes',
             component: React.lazy(() => import('./MajlesTypesApp'))
         },
@@ -22,10 +26,12 @@ export const MajlesTypesAppConfig = {
             path     : '/admin/majlestypes/:id',
             component: React.lazy(() => import('./MajlesTypesApp'))
         },
+        
         // {
         //     path     : '/admin/majlestypes/',
         //     component: () => <Redirect to="/admin/majlestypes/all"/>
         // }
+
         
     ]
 };

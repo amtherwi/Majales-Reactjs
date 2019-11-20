@@ -10,6 +10,7 @@ import reducer from './store/reducers';
 // import MajlesTypeTable from './components/MajlesTypeTable';
 import MajlesTypesHeader from './components/MajlesTypesHeader';
 import MajlesTypes from './components/MajlesTypes'
+import NewMajlesType from './components/NewMajlesType';
 
 function MajlesTypesApp()
 {
@@ -38,8 +39,10 @@ function MajlesTypesApp()
             }
             content={
                 <MajlesTypes />
+                // <NewMajlesType/>
             }
-            innerScroll
+            
+            // innerScroll
         />
     );
 }

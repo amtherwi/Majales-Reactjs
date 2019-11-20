@@ -51,7 +51,7 @@ const MajlesTypesHeader = (props) => {
             </div>
             <FuseAnimate animation="transition.slideRightIn" delay={300}>
                 <Button component={Link} to='/admin/majlestypes/new' className="whitespace-no-wrap"  variant="contained">
-                    <span className="hidden sm:flex">إضافة جديد</span>
+                    <Icon>add_circle</Icon>
                     <span className="flex sm:hidden">New</span>
                 </Button>
             </FuseAnimate>

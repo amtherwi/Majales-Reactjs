@@ -5,9 +5,28 @@ class majlestyepeService extends FuseUtils.EventEmitter {
 
     getMajlesTypeById = (id) => {
         return new Promise((resolve, reject) => {
-            axios.get('http://localhost:21021/api/services/app/MajlesTypes/GetMajlesTypesById',{
+            axios.get('http://localhost:21021/api/services/app/MajlesType/GetMajlesTypesById',{
                 params: {
                     id
+                }
+            })
+            .then(response => {
+                if ( response.data.success)
+                {
+                    resolve(response.data.result);
+                }
+                else
+                {
+                    reject(response.data.error);
+                }
+            });
+        });
+    };
+    getMajlesTypeByType = (Type) => {
+        return new Promise((resolve, reject) => {
+            axios.get('http://localhost:21021/api/services/app/MajlesType/GetMajlesTypesByType',{
+                params: {
+                    Type
                 }
             })
             .then(response => {
@@ -41,7 +60,7 @@ class majlestyepeService extends FuseUtils.EventEmitter {
 
     createMajlesType = (majlestype) => {
         return new Promise((resolve, reject) => {
-            axios.post('http://localhost:21021/api/services/app/MajlesTypes/Create', majlestype)
+            axios.post('http://localhost:21021/api/services/app/MajlesType/Create', majlestype)
                 .then(response => {
                     if ( response.data.success )
                     {
@@ -57,7 +76,7 @@ class majlestyepeService extends FuseUtils.EventEmitter {
 
     updateMajlesType = (majlestype) => {
         return new Promise((resolve, reject) => {
-            axios.put('http://localhost:21021/api/services/app/MajlesTypes/Update', {
+            axios.put('http://localhost:21021/api/services/app/MajlesType/Update', {
                 majlestype: majlestype
                 })
                 .then(response => {
@@ -75,14 +94,14 @@ class majlestyepeService extends FuseUtils.EventEmitter {
 
     deleteMajlesType = (id) => {
         return new Promise((resolve, reject) => {
-            axios.put('http://localhost:21021/api/services/app/MajlesTypes/Delete', { 
+            axios.delete('http://localhost:21021/api/services/app/MajlesType/Delete', { 
                 params: {   
                     id
                 }})
                 .then(response => {
                     if ( response.data.success )
                     {
-                        resolve("Majles was successfully deleted !! ");
+                        resolve(true);
                     }
                     else
                     {

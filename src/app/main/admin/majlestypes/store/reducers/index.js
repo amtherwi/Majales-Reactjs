@@ -1,9 +1,12 @@
 import {combineReducers} from 'redux';
 import majlestypes from './majlestypes.reducer';
-import calssification from './classification.reducer'
+import classification from './classification.reducer'
+import majlestype from './majlestype.reducer';
+
 const reducer = combineReducers({
     majlestypes,
-    calssification
+    classification,
+    majlestype
 });
 
 export default reducer;

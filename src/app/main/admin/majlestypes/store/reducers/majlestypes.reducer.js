@@ -2,7 +2,8 @@ import * as Actions from '../actions';
 
 const initialState = {
     data      : [],
-    searchText: ''
+    searchText: '',
+    
 };
 
 const majlestypesReducer = function (state = initialState, action) {

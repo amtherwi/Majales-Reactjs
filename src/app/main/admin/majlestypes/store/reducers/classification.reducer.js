@@ -15,13 +15,13 @@ const classificationReducer = function (state = initialState, action) {
                 data: action.payload
             };
         }
-        // case Actions.SET_MAJALES_SEARCH_TEXT:
-        // {
-        //     return {
-        //         ...state,
-        //         searchText: action.searchText
-        //     };
-        // }
+        case Actions.SAVE_CLASSIFICATION:
+            {
+                return {
+                    ...state,
+                    data: action.payload
+                };
+            }
         default:
         {
             return state;
