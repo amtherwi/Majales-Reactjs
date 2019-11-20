@@ -1,21 +1,33 @@
 import React , {useEffect, useRef, useState}from 'react';
-import {FusePageCarded} from '@fuse';
+import {FusePageCarded,FuseAnimate} from '@fuse';
 import {useDispatch, useSelector} from 'react-redux';
-
+import {Fab, Icon} from '@material-ui/core';
 
 import withReducer from 'app/store/withReducer';
 import * as Actions from './store/actions'
 import reducer from './store/reducers';
+import MajlesTypeDialog from './components/MajlesTypeDialog'
 
 // import MajlesTypeTable from './components/MajlesTypeTable';
 import MajlesTypesHeader from './components/MajlesTypesHeader';
 import MajlesTypes from './components/MajlesTypes'
-import NewMajlesType from './components/NewMajlesType';
+// 
+import {makeStyles} from '@material-ui/styles';
 
-function MajlesTypesApp()
+const useStyles = makeStyles({
+    addButton: {
+        position: 'absolute',
+        right   : 12,
+        bottom  : 12,
+        zIndex  : 99
+    }
+});
+function MajlesTypesApp(props)
 {
     const dispatch = useDispatch();
     const majlestypes = useSelector(({majlestypesApp}) => majlestypesApp.majlestypes);
+    const classes = useStyles(props);
+    //const pageLayout = useRef(null);
 
     useEffect(() => {
         dispatch(Actions.getMajlesTypes());
@@ -29,6 +41,7 @@ function MajlesTypesApp()
     }
 
     return (
+        <React.Fragment>
         <FusePageCarded
             classes={{
                 content: "flex",
@@ -39,11 +52,14 @@ function MajlesTypesApp()
             }
             content={
                 <MajlesTypes />
-                // <NewMajlesType/>
+                
             }
             
             // innerScroll
         />
+        
+        <MajlesTypeDialog/>
+    </React.Fragment>
     );
 }
 

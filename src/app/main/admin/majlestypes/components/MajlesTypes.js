@@ -1,14 +1,19 @@
 import React, {useEffect, useState} from 'react';
 import {Divider,ExpansionPanelActions, Button,IconButton, Icon, ExpansionPanel, 
-        ExpansionPanelDetails, ExpansionPanelSummary, Typography} from '@material-ui/core';
-import {FuseScrollbars, FuseAnimateGroup} from '@fuse';
-import {withRouter} from 'react-router-dom';
+        ExpansionPanelDetails, ExpansionPanelSummary, Typography,Fab} from '@material-ui/core';
+import {FuseScrollbars, FuseAnimateGroup,FuseAnimate} from '@fuse';
+// import {withRouter} from 'react-router-dom';
 import {makeStyles} from '@material-ui/styles';
 import _ from '@lodash';
 import * as Actions from '../store/actions';
 import {useDispatch, useSelector} from 'react-redux';
 import TypeDetails from './TypeDetails';
-import LeftSideLayout1 from 'app/fuse-layouts/layout1/components/LeftSideLayout1';
+// import LeftSideLayout1 from 'app/fuse-layouts/layout1/components/LeftSideLayout1';
+// import {FusePageCarded,FuseAnimate} from '@fuse';
+
+import withReducer from 'app/store/withReducer';
+import reducer from '../store/reducers';
+
 // import MuiExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 // import { red } from '@material-ui/core/colors';
 
@@ -21,6 +26,12 @@ const useStyles = makeStyles(theme => ({
                     theme.palette.primary.dark + ' 50%, ' + 
                     theme.palette.primary.main + ' 100%)',
         color     : theme.palette.primary.contrastText
+    },
+    addButton: {
+        position: 'absolute',
+        right   : 12,
+        bottom  : 12,
+        zIndex  : 99
     },
     button: {
         margin: theme.spacing(1),
@@ -100,7 +111,8 @@ function MajlesTypes(props) {
     };
    
     function handleUpdate(item){
-        props.history.push('/admin/majlestypes/' + item.id + '/' + item.type);
+        dispatch(Actions.openEditMajlestypeDialog(item));
+        //props.history.push('/admin/majlestypes/' + item.id + '/' + item.type);
     }
     
         function handelDelete(item)
@@ -112,6 +124,7 @@ function MajlesTypes(props) {
         }
      
     return (
+       
     <div className="w-full flex  ">
         <FuseScrollbars className="  w-full">
                     {
@@ -202,10 +215,22 @@ function MajlesTypes(props) {
                                     </ExpansionPanelActions>
                                 </ExpansionPanel>
                                 ))}
-                    </FuseAnimateGroup>    
+                <FuseAnimate animation="transition.expandIn" delay={300}>
+                <Fab
+                    color="primary"
+                    aria-label="add"
+                    className={classes.addButton}
+                    onClick={ev => dispatch(Actions.openNewMajlestypeDialog())}
+                >
+                    <Icon > add</Icon>
+                </Fab>
+            </FuseAnimate>
+        </FuseAnimateGroup>    
       </FuseScrollbars>
+    
     </div>
+
    );
 }
-
-export default withRouter(MajlesTypes);
+export default withReducer('majlestypesApp', reducer)(MajlesTypes);
+// export default withRouter(MajlesTypes);

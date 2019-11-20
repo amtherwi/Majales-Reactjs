@@ -6,7 +6,7 @@ import {FuseAnimate} from '@fuse';
 import {useDispatch, useSelector} from 'react-redux';
 import {Link} from 'react-router-dom';
 import * as Actions from '../store/actions';
-
+import MajlesTypeDialog from './MajlesTypeDialog';
 const MajlesTypesHeader = (props) => {
 
     const dispatch = useDispatch();
@@ -49,12 +49,7 @@ const MajlesTypesHeader = (props) => {
                 </ThemeProvider>
 
             </div>
-            <FuseAnimate animation="transition.slideRightIn" delay={300}>
-                <Button component={Link} to='/admin/majlestypes/new' className="whitespace-no-wrap"  variant="contained">
-                    <Icon>add_circle</Icon>
-                    <span className="flex sm:hidden">New</span>
-                </Button>
-            </FuseAnimate>
+ 
         </div>
     );
 }
