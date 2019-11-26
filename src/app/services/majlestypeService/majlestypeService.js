@@ -42,7 +42,7 @@ class majlestyepeService extends FuseUtils.EventEmitter {
         });
     };
 
-    getMajleType = () => {
+    getMajlesTypes = () => {
         return new Promise((resolve, reject) => {
             axios.get('http://localhost:21021/api/services/app/MajlesType/GetAll')
                 .then(response => {

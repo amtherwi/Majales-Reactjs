@@ -1,48 +1,30 @@
 import  classificationService  from 'app/services/classificationService'
 import {showMessage} from 'app/store/actions/fuse';
-import {getMajlesType} from './majlestype.actions'
-import { getMajlesTypes } from './majlestypes.actions'
+import { collapsedExpansion } from './majlestypes.actions'
 export const GET_CLASSIFICATION = '[CLASSIFICATION APP] GET CLASSIFICATION';
 export const SAVE_CLASSIFICATION ='[CLASSIFICATION APP] SAVE CLASSIFICATION';
+
+export const OPEN_NEW_CLASSIFICATION_DIALOG = '[CLASSIFICATION APP] OPEN NEW CLASSIFICATION DIALOG';
+export const CLOSE_NEW_CLASSIFICATION_DIALOG = '[CLASSIFICATION APP] CLOSE NEW CLASSIFICATION DIALOG';
+export const OPEN_EDIT_CLASSIFICATION_DIALOG = '[CLASSIFICATION APP] OPEN EDIT CLASSIFICATION DIALOG';
+export const CLOSE_EDIT_CLASSIFICATION_DIALOG = '[CLASSIFICATION APP] CLOSE EDIT CLASSIFICATION DIALOG';
 
 export function getCalssification(params)
 {
 
      return (dispatch) =>
      classificationService.getClassifyByMajlesType(params)
-        .then((classification) =>
+        .then((classification) =>{
+            if(classification){
              dispatch({
                  type   : GET_CLASSIFICATION,
                  payload: classification
              })
-         );
-
-}
-export function saveClassification(data,cId) {
-  
-    //if(cId === 'new')
-    //{
-        console.log('data in actionSave,',data)
-        console.log('form in majlesTypdId,',cId)
-     
-        return (dispatch) => {
-            classificationService.createClassification(data)
-                .then((classification) => 
-                {
-                    dispatch(showMessage({message: 'تم حفظ قيم التصنيف  بنجاح'}))
-                    return dispatch({
-                        type   : SAVE_CLASSIFICATION,
-                        payload: classification
-                    });          
-                }
-            )
-            .catch( err =>{dispatch(showMessage({message: 'لم يتم الحفظ'})); });
-     
             }
-        
-    //}
-
+        })
+       .catch( error => {dispatch(showMessage({message: 'No Classification'}))});
 }
+
 export function deleteClassification(params)
 {
     return (dispatch) =>
@@ -52,7 +34,7 @@ export function deleteClassification(params)
                 dispatch(showMessage({message: ' تم الحذف بنجاح '}))
             }
         }  
-         )
+         ).then(dispatch(collapsedExpansion()))
          .catch( err =>{dispatch(showMessage({message: 'لم يتم الحذف'})); });
 }
 export function newClassification()
@@ -74,5 +56,70 @@ export function newClassification()
     return {
         type   : GET_CLASSIFICATION,
         payload: data
+    }
+}
+export function addClassification(data)
+{
+  
+     return (dispatch) => {
+        classificationService.createClassification(data)
+            .then((classification) => 
+            {
+                dispatch(showMessage({message: 'تم إضافة نوع المجلس بنجاح'}))
+                return dispatch({
+                    type   : SAVE_CLASSIFICATION,
+                     payload: classification
+                });          
+            }
+        ).then(() => dispatch(getCalssification(data.majlesTypeId)))
+        .catch( err =>{dispatch(showMessage({message: 'لم يتم الإضافة'})); }); 
+    }
+
+}
+
+export function updateClassifiaction(data)
+{
+  
+     return (dispatch) => {
+        classificationService.updateClassification(data)
+            .then((classification) => 
+            {
+                dispatch(showMessage({message: 'تم حفظ التعديل بنجاح'}))
+                return dispatch({
+                    type   : SAVE_CLASSIFICATION,
+                     payload: classification
+                });          
+            }
+        ).then(() => dispatch(getCalssification(data.majlesTypeId)))
+        .catch( err =>{dispatch(showMessage({message: 'لم يتم الحفظ'})); }); 
+    }
+
+}
+
+export function openNewClassificationDialog()
+{
+    return {
+        type: OPEN_NEW_CLASSIFICATION_DIALOG
+    }
+}
+
+export function closeNewClassificationDialog()
+{
+    return {
+        type: CLOSE_NEW_CLASSIFICATION_DIALOG
+    }
+}
+export function openEditClassificationDialog(data)
+{
+    return {
+        type: OPEN_EDIT_CLASSIFICATION_DIALOG,
+        data
+    }
+}
+
+export function closeEditClassificationDialog()
+{
+    return {
+        type: CLOSE_EDIT_CLASSIFICATION_DIALOG
     }
 }

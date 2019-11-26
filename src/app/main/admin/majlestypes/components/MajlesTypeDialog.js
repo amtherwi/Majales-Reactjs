@@ -1,25 +1,15 @@
 import React, {useEffect, useCallback} from 'react';
 import {TextField, Button, Dialog, DialogActions, DialogContent, Icon, IconButton, Typography, Toolbar, AppBar, Avatar} from '@material-ui/core';
 import {useForm} from '@fuse/hooks';
-import FuseUtils from '@fuse/FuseUtils';
+// import FuseUtils from '@fuse/FuseUtils';
+import _ from '@lodash';
 import * as Actions from '../store/actions';
 import {useDispatch, useSelector} from 'react-redux';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 
 const defaultFormState = {
-    // id      : '',
     type    : ''
-    // lastName: '',
-    // avatar  : 'assets/images/avatars/profile.jpg',
-    // nickname: '',
-    // company : '',
-    // jobTitle: '',
-    // email   : '',
-    // phone   : '',
-    // address : '',
-    // birthday: '',
-    // notes   : ''
 };
 
 function MajlesTypeDialog(props)
@@ -72,9 +62,9 @@ function MajlesTypeDialog(props)
 
     function canBeSubmitted()
     {
-        return (
-            form.type.length > 0
-        );
+        return(form.type.length > 0 &&
+            !_.isEqual(majlestypeDialog.data, form));
+
     }
 
     function handleSubmit(event)
@@ -126,7 +116,8 @@ function MajlesTypeDialog(props)
                 <DialogContent classes={{root: "p-24"}}>
                     <div className="flex">
                         <div className="min-w-48 pt-20">
-                            <Icon color="action">account_circle</Icon>
+                            <Icon color="action">blur_circular
+</Icon>
                         </div>
 
                         <TextField
