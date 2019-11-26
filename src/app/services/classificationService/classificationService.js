@@ -4,6 +4,7 @@ import FuseUtils from '@fuse/FuseUtils';
 class classificationService extends FuseUtils.EventEmitter {
 
     getClassifyByMajlesType = (id) => {
+       
         return new Promise((resolve, reject) => {
             axios.get('http://localhost:21021/api/services/app/Classification/GetClassificationByMajlesTypeId',{
                 params: {
@@ -19,8 +20,10 @@ class classificationService extends FuseUtils.EventEmitter {
                 {
                     reject(response.data.error);
                 }
-            });
+            })
+             
         });
+   
     };
 
     getClassificationById = (id) => {
@@ -76,7 +79,6 @@ class classificationService extends FuseUtils.EventEmitter {
 
     createClassification = (classification) => {
         
-        console.log("inside service",classification);
         
         return new Promise((resolve, reject) => {
             axios.post('http://localhost:21021/api/services/app/Classification/Create', classification)
@@ -96,9 +98,7 @@ class classificationService extends FuseUtils.EventEmitter {
 
     updateClassification = (classification) => {
         return new Promise((resolve, reject) => {
-            axios.put('http://localhost:21021/api/services/app/Classification/Update', {
-                classification: classification
-                })
+            axios.put('http://localhost:21021/api/services/app/Classification/Update', classification)
                 .then(response => {
                     if ( response.data.success )
                     {
@@ -114,7 +114,7 @@ class classificationService extends FuseUtils.EventEmitter {
 
     deleteClassification = (id) => {
         return new Promise((resolve, reject) => {
-            axios.put('http://localhost:21021/api/services/app/Classification/Delete', { 
+            axios.delete('http://localhost:21021/api/services/app/Classification/Delete', { 
                 params: {   
                     id
                 }})

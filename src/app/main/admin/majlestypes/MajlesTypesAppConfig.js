@@ -14,10 +14,10 @@ export const MajlesTypesAppConfig = {
         //     path     : '/admin/majlestypes/:id/:type?',
         //     component: React.lazy(() => import('./components/MajlesTypeDialog'))
         // },
-        {
-            path     : '/admin/majlestypes/classifications',
-            component: React.lazy(() => import('./majlestype/Classification'))
-        },
+        // {
+        //     path     : '/admin/majlestypes/classifications',
+        //     component: React.lazy(() => import('./majlestype/Classification'))
+        // },
         {
             path     : '/admin/majlestypes',
             component: React.lazy(() => import('./MajlesTypesApp'))

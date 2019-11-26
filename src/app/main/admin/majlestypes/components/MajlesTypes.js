@@ -1,21 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import {Divider,ExpansionPanelActions, Button,IconButton, Icon, ExpansionPanel, 
-        ExpansionPanelDetails, ExpansionPanelSummary, Typography,Fab} from '@material-ui/core';
+import {Icon, ExpansionPanel, 
+        ExpansionPanelDetails, ExpansionPanelSummary, Typography,Fab, Grid} from '@material-ui/core';
 import {FuseScrollbars, FuseAnimateGroup,FuseAnimate} from '@fuse';
-// import {withRouter} from 'react-router-dom';
 import {makeStyles} from '@material-ui/styles';
 import _ from '@lodash';
 import * as Actions from '../store/actions';
 import {useDispatch, useSelector} from 'react-redux';
-import TypeDetails from './TypeDetails';
-// import LeftSideLayout1 from 'app/fuse-layouts/layout1/components/LeftSideLayout1';
-// import {FusePageCarded,FuseAnimate} from '@fuse';
-
+import Classification from './Classification';
+import SelectActionList from './SelectActionList';
 import withReducer from 'app/store/withReducer';
 import reducer from '../store/reducers';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-// import MuiExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-// import { red } from '@material-ui/core/colors';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -89,42 +86,33 @@ function MajlesTypes(props) {
     const searchText = useSelector(({majlestypesApp}) => majlestypesApp.majlestypes.searchText);
     const classes = useStyles();
     const [data, setData] = useState(majlestypes);
-    const [expanded, setExpanded] = useState(false);
-    const [ishidden, setIsHidden] = useState(true);
-
+    //const [expanded, setExpanded] = useState(false);
+    const expanded = useSelector(({majlestypesApp}) => majlestypesApp.majlestypes.expanded);
+    useEffect(() => {
+        dispatch(Actions.getMajlesTypes());
+    }, [dispatch]);
     
-
-
-    // useEffect(() => {
-    //     setData(() => dispatch(Actions.getMajlesTypes()));
-    // }, [dispatch]);
-
     useEffect(() => {
         setData(searchText.length === 0 ? majlestypes : _.filter(majlestypes, item => item.type.includes(searchText)))
+        
+
     }, [majlestypes, searchText]);
 
     const toggleExpansion = panel => (event, expanded) => {
-        setExpanded(expanded ? panel : false);
-        setIsHidden(true)
-        // '#d1ea52'        
+
+       if(expanded){
         
+        dispatch(Actions.toggoleExpansion(panel))
+
+       } else {
+           dispatch(Actions.collapsedExpansion())
+       }
+       //panel : false);
+       
+ 
     };
    
-    function handleUpdate(item){
-        dispatch(Actions.openEditMajlestypeDialog(item));
-        //props.history.push('/admin/majlestypes/' + item.id + '/' + item.type);
-    }
-    
-        function handelDelete(item)
-        {
-          const {id} = item;
-         
-         dispatch(Actions.deleteMajlesType(id))
-                 
-        }
-     
-    return (
-       
+    return (  
     <div className="w-full flex  ">
         <FuseScrollbars className="  w-full">
                     {
@@ -141,80 +129,53 @@ function MajlesTypes(props) {
                             animation: "transition.slideUpBigIn"
                         }}>
                     
-                            {_.orderBy(data)
-                            .map(type => (
-                                
-                                <ExpansionPanel 
-                                    classes={{
-                                        root    : classes.panel,
-                                        expanded: classes.expanded
-                                    }}
-                                    key={type.id}
-                                    expanded={expanded === type.id}
-                                    onChange={toggleExpansion(type.id)}
-                                    elevation={0}
-                                    className='flex-grow'
-                                    
-                                >
-                                    <ExpansionPanelSummary expanded={()=>setIsHidden(false)}
-                                        expandIcon={<Icon>expand_more</Icon>}
-                                        aria-controls={`${type.id}-content`}
-                                        id={`${type.id}-header`}
-                                    >
-                                        {/* <div className="flex items-center"> */}
-                                            <Typography id='Type' className={classes.heading}>{type.type}</Typography>
-                                            <div hidden={ishidden} className={classes.secondaryHeading}>
-                                            <IconButton 
-                                                // key={type.id}
-                                                // variant="outlined" 
-                                                // color="primary" 
-                                                // className={classes.button}
-                                                className={classes.secondaryHeading}
-                                                onClick={event => handleUpdate(type)}
-                                                >
-                                                    <Icon>edit</Icon>
-                                            </IconButton> 
-                                             <IconButton  
-                                                // variant="outlined" 
-                                                // color="default" 
-                                                // className={classes.button}
-                                                onClick={event => handelDelete(type)}
-                                                >
-                                                    <Icon>delete</Icon>
-                                                </IconButton> 
-                                                {/* </div> */}
-                                        </div>
-                                    </ExpansionPanelSummary>
-
-                                    <ExpansionPanelDetails  style={{    backgroundColor: 'rgba(0, 0, 0, .03)',}}>
-                                          {  expanded == type.id? 
-                                            <TypeDetails typesId={ expanded }  />
-                                             : <Typography></Typography>
-                                            }
-                                    </ExpansionPanelDetails>
-                                    <Divider />
-                                    <ExpansionPanelActions style={{    backgroundColor: 'rgba(0, 0, 0, .03)',}}>
-                                   
-                                    <Button 
-                                    // key={type.id}
-                                    variant="outlined" 
-                                    color="primary" 
-                                    className={classes.button}
-                                    onClick={event => handleUpdate(type)}
-                                    >
-                                        <Icon>edit</Icon>
-                                    </Button>
-                                    <Button  
-                                    variant="outlined" 
-                                    color="default" 
-                                    className={classes.button}
-                                    onClick={event => handelDelete(type)}
-                                    >
-                                        <Icon>delete</Icon>
-                                    </Button>
-                                    </ExpansionPanelActions>
-                                </ExpansionPanel>
-                                ))}
+                        {_.orderBy(data)
+                        .map(majtype => (
+                            
+                            <ExpansionPanel 
+                                classes={{
+                                    root    : classes.panel,
+                                    expanded: classes.expanded
+                                }}
+                                key={majtype.id}
+                                expanded={expanded === majtype.id}
+                                onChange={toggleExpansion(majtype.id)}
+                                elevation={0}
+                                className='flex-grow'
+                            >
+                            <ExpansionPanelSummary 
+                                expandIcon={<ExpandMoreIcon/>}
+                                aria-label="Expand"
+                                aria-controls={`${majtype.id}-content`}
+                                id={`${majtype.id}-header`}
+                            >
+                                <FormControlLabel
+                                    aria-label="Acknowledge"
+                                    onClick={event => event.stopPropagation()}
+                                    onFocus={event => event.stopPropagation()}
+                                    // disabled = {expanded === type.id?  false:true}
+                                    control={expanded === majtype.id?
+                                        <Grid className={classes.buttonlink} hidden = {expanded === majtype.id?  false:true}> 
+                                            <SelectActionList majlestype={majtype}/>
+                                        </Grid>
+                                        :<div></div>    
+                                        }
+                                    label={
+                                        <Typography id='Type' className={classes.heading}>
+                                            {majtype.type}
+                                        </Typography>
+                                        }
+                                /> 
+                            </ExpansionPanelSummary>
+                            <ExpansionPanelDetails  style={{backgroundColor: 'rgba(0, 0, 0, .03)',}}>
+                                        {  expanded === majtype.id? 
+                                        <Classification majlesType={majtype}   />
+                                            : <Typography></Typography>
+                                        }
+                            </ExpansionPanelDetails>
+                      
+                            </ExpansionPanel>
+                            ))}
                 <FuseAnimate animation="transition.expandIn" delay={300}>
                 <Fab
                     color="primary"
@@ -232,5 +193,5 @@ function MajlesTypes(props) {
 
    );
 }
-export default withReducer('majlestypesApp', reducer)(MajlesTypes);
+export default  withReducer('majlestypesApp', reducer)(MajlesTypes);
 // export default withRouter(MajlesTypes);
