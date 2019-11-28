@@ -65,13 +65,13 @@ export function addClassification(data)
         classificationService.createClassification(data)
             .then((classification) => 
             {
-                dispatch(showMessage({message: 'تم إضافة نوع المجلس بنجاح'}))
+                dispatch(showMessage({message: 'تم إضافة التصنيفات بنجاح'}))
                 return dispatch({
                     type   : SAVE_CLASSIFICATION,
                      payload: classification
                 });          
             }
-        ).then(() => dispatch(getCalssification(data.majlesTypeId)))
+        ).then(dispatch(collapsedExpansion()))
         .catch( err =>{dispatch(showMessage({message: 'لم يتم الإضافة'})); }); 
     }
 
