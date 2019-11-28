@@ -1,5 +1,5 @@
 import * as Actions from '../actions';
-
+//---------
 const initialState = {
     data      : [],
     classificationDialog     : {
