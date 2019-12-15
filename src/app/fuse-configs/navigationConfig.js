@@ -22,12 +22,6 @@ const navigationConfig = [
                         'title': 'عرض المجالس',
                         'type' : 'item',
                         'url'  : '/admin/majales/all'
-                    },
-                    {
-                        'id'   : 'add-board',
-                        'title': 'إضافة مجلس',
-                        'type' : 'item',
-                        'url'  : '/admin/majales/add'
                     }
                 ]
             },
