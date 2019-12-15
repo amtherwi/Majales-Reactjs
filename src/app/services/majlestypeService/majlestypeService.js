@@ -42,7 +42,7 @@ class majlestyepeService extends FuseUtils.EventEmitter {
         });
     };
 
-    getMajleType = () => {
+    getMajlesTypes = () => {
         return new Promise((resolve, reject) => {
             axios.get('http://localhost:21021/api/services/app/MajlesType/GetAll')
                 .then(response => {
@@ -76,9 +76,9 @@ class majlestyepeService extends FuseUtils.EventEmitter {
 
     updateMajlesType = (majlestype) => {
         return new Promise((resolve, reject) => {
-            axios.put('http://localhost:21021/api/services/app/MajlesType/Update', {
-                majlestype: majlestype
-                })
+            axios.put('http://localhost:21021/api/services/app/MajlesType/Update',
+                majlestype
+                )
                 .then(response => {
                     if ( response.data.success )
                     {

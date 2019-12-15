@@ -67,9 +67,9 @@ const navigationConfig = [
                     // },
                     {
                         'id'   : 'new-majlestypes',
-                        'title': 'إضافة تصنيف',
+                        'title': 'التصنيفات',
                         'type' : 'item',
-                        'url'  : '/admin/majlestypes/new',
+                        'url'  : '/admin/majlestypes/classifications',
                          'exact': true
                     }
                    

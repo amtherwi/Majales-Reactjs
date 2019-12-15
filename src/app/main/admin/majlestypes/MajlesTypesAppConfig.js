@@ -10,14 +10,14 @@ export const MajlesTypesAppConfig = {
     },
     auth    : authRoles.user,
     routes  : [
-        {
-            path     : '/admin/majlestypes/:id/:type?',
-            component: React.lazy(() => import('./majlestype/MajlesType'))
-        },
-        {
-            path     : '/admin/classifications/:id/:type?',
-            component: React.lazy(() => import('./majlestype/Classification'))
-        },
+        // {
+        //     path     : '/admin/majlestypes/:id/:type?',
+        //     component: React.lazy(() => import('./components/MajlesTypeDialog'))
+        // },
+        // {
+        //     path     : '/admin/majlestypes/classifications',
+        //     component: React.lazy(() => import('./majlestype/Classification'))
+        // },
         {
             path     : '/admin/majlestypes',
             component: React.lazy(() => import('./MajlesTypesApp'))
@@ -26,6 +26,10 @@ export const MajlesTypesAppConfig = {
             path     : '/admin/majlestypes/:id',
             component: React.lazy(() => import('./MajlesTypesApp'))
         },
+        // {
+        //     path     : '/admin/majlestypes/new',
+        //     component: React.lazy(() => import('./components/MajlesTypeDialog'))
+        // },
         
         // {
         //     path     : '/admin/majlestypes/',
