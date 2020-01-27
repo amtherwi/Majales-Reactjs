@@ -1,7 +1,7 @@
 import React from 'react';
 import {Paper, Chip, Typography, TextField, MenuItem} from '@material-ui/core';
 import {emphasize} from '@material-ui/core/styles/colorManipulator';
-import CreatableSelect from 'react-select/lib/Creatable';
+import Creatable from 'react-select/creatable';
 import Select from 'react-select';
 import clsx from 'clsx';
 import {makeStyles} from '@material-ui/styles';
@@ -114,6 +114,7 @@ function Control(props)
         <TextField
             fullWidth
             className={clsx(classes.root, props.selectProps.textFieldProps.variant)}
+            required={props.selectProps.required}
             InputProps={{
                 inputComponent,
                 inputProps: {
@@ -221,18 +222,28 @@ const components = {
 
 function FuseChipSelect(props)
 {
+    const handleOnChange = value => {
+        if ( value === null )
+        {
+            value = [];
+        }
+        props.onChange && props.onChange(value);
+    };
+
     return (
         props.variant === 'fixed' ? (
             <Select
                 classNamePrefix="fuse-chip-select"
                 {...props}
                 components={components}
+                onChange={handleOnChange}
             />
         ) : (
-            <CreatableSelect
+            <Creatable
                 classNamePrefix="fuse-chip-select"
                 {...props}
                 components={components}
+                onChange={handleOnChange}
             />
         )
     );

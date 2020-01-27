@@ -5,15 +5,15 @@ function PurchaseButton()
 {
     return (
         <Button component="a"
-                href="https://themeforest.net/item/fuse-react-react-redux-material-design-admin-template/21769397?ref=withinpixels"
+                href="https://1.envato.market/zDGL6"
                 target="_blank"
                 rel="noreferrer noopener"
                 role="button"
                 className="normal-case"
                 variant="contained"
                 color="secondary">
-            <Icon className="text-16 mr-4">shopping_cart</Icon>
-            <span>Purchase FUSE React</span>
+            <Icon className="text-16">shopping_cart</Icon>
+            <span className="mx-4">Purchase FUSE React</span>
         </Button>
     );
 }

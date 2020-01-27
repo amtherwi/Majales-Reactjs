@@ -1,5 +1,5 @@
-import {createMuiTheme} from '@material-ui/core/styles';
-import * as Actions from 'app/store/actions/fuse/index';
+import {createMuiTheme} from '@material-ui/core';
+import * as Actions from 'app/store/actions/fuse';
 import FuseLayoutConfigs from 'app/fuse-layouts/FuseLayoutConfigs';
 import FuseSettingsConfig from 'app/fuse-configs/settingsConfig';
 import FuseThemesConfig from 'app/fuse-configs/themesConfig';
@@ -14,6 +14,7 @@ import {
     mainThemeVariations
 } from '@fuse/FuseDefaultSettings';
 
+const themesObjRaw = Object.keys(FuseThemesConfig).length !== 0 ? FuseThemesConfig : defaultThemes;
 const initialSettings = getInitialSettings();
 const initialThemes = getInitialThemes();
 
@@ -30,13 +31,13 @@ const settings = function (state = initialState, action) {
     {
         case Actions.SET_SETTINGS:
         {
-            const newSettings = _.merge({}, state.current, action.value && action.value.layout && action.value.layout.style ? {layout: {config: FuseLayoutConfigs[action.value.layout.style].defaults}} : {}, action.value)
-            const themes = newSettings.theme.main !== state.current.theme.main ? {...state.themes, ...updateMainThemeVariations(newSettings.theme.main)} : state.themes;
+            const current = generateSettings(state.defaults, action.value);
+            const themes = current.theme.main !== state.current.theme.main ? {...state.themes, ...updateMainThemeVariations(current.theme.main, state.themes)} : state.themes;
             return {
                 ...state,
-                current: newSettings,
+                current,
                 themes,
-                ...getThemeOptions(themes, newSettings)
+                ...getThemeOptions(themes, current)
             };
         }
         case Actions.SET_INITIAL_SETTINGS:
@@ -45,19 +46,20 @@ const settings = function (state = initialState, action) {
         }
         case Actions.SET_DEFAULT_SETTINGS:
         {
-            const newSettings = _.merge({}, state.defaults, action.value && action.value.layout && action.value.layout.style ? {layout: {config: FuseLayoutConfigs[action.value.layout.style].defaults}} : {}, action.value);
-            const themes = newSettings.theme.main !== state.defaults.theme.main ? {...state.themes, ...updateMainThemeVariations(newSettings.theme.main)} : state.themes;
+            const defaults = generateSettings(state.defaults, action.value);
+            let themes = defaults.theme.main !== state.defaults.theme.main ? {...state.themes, ...updateMainThemeVariations(defaults.theme.main, state.themes)} : state.themes;
+            themes = defaults.direction !== state.defaults.direction ? updateThemeDirections(themes, defaults.direction) : themes;
             return {
                 ...state,
-                defaults: _.merge({}, newSettings),
-                current : _.merge({}, newSettings),
+                defaults: _.merge({}, defaults),
+                current : _.merge({}, defaults),
                 themes,
-                ...getThemeOptions(themes, newSettings)
+                ...getThemeOptions(themes, defaults)
             };
         }
         case Actions.RESET_DEFAULT_SETTINGS:
         {
-            const themes = {...state.themes, ...updateMainThemeVariations(state.defaults.theme.main)};
+            const themes = {...state.themes, ...updateMainThemeVariations(state.defaults.theme.main, state.themes)};
             return {
                 ...state,
                 defaults: _.merge({}, state.defaults),
@@ -93,26 +95,35 @@ function getInitialSettings()
  */
 function getInitialThemes()
 {
-    const themesObj = Object.keys(FuseThemesConfig).length !== 0 ? FuseThemesConfig : defaultThemes;
+    const direction = initialSettings.direction;
 
-    const themes = Object.assign({}, ...Object.entries(themesObj).map(([key, value]) => {
+    const themes = Object.assign({}, ...Object.entries(themesObjRaw).map(([key, value]) => {
             const muiTheme = _.merge({}, defaultThemeOptions, value, mustHaveThemeOptions);
             return {
-                [key]: createMuiTheme(_.merge({}, muiTheme, {mixins: extendThemeWithMixins(muiTheme)}))
+                [key]: createMuiTheme(_.merge({}, muiTheme, {
+                    mixins: extendThemeWithMixins(muiTheme),
+                    direction
+                }))
             }
         }
     ));
 
     return {
         ...themes,
-        ...mainThemeVariations(themesObj[initialSettings.theme.main])
+        ...mainThemeVariations(
+            {
+                ...themesObjRaw[initialSettings.theme.main],
+                direction
+            })
     }
 }
 
-function updateMainThemeVariations(mainTheme)
+function updateMainThemeVariations(mainTheme, themes)
 {
-    const themesObj = Object.keys(FuseThemesConfig).length !== 0 ? FuseThemesConfig : defaultThemes;
-    return mainThemeVariations(themesObj[mainTheme])
+    return mainThemeVariations({
+        ...themesObjRaw[mainTheme],
+        direction: themes[mainTheme].direction
+    })
 }
 
 function getThemeOptions(themes, settings)
@@ -122,6 +133,23 @@ function getThemeOptions(themes, settings)
         navbarTheme : themes[settings.theme.navbar],
         toolbarTheme: themes[settings.theme.toolbar],
         footerTheme : themes[settings.theme.footer],
-        ...updateMainThemeVariations(settings.theme.main)
+        ...updateMainThemeVariations(settings.theme.main, themes)
     }
+}
+
+function updateThemeDirections(themes, direction)
+{
+    const response = {};
+    Object.entries(themes).map(([key, value]) => {
+        return response[key] = {
+            ...value,
+            direction
+        }
+    });
+    return response;
+}
+
+export function generateSettings(defaultSettings, newSettings)
+{
+    return _.merge({}, defaultSettings, newSettings && newSettings.layout && newSettings.layout.style ? {layout: {config: FuseLayoutConfigs[newSettings.layout.style].defaults}} : {}, newSettings);
 }

@@ -1,11 +1,11 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {Divider, Icon, IconButton, Input, ListItemIcon, ListItemText, Menu, MenuItem, Tooltip, Typography} from '@material-ui/core';
+import {amber} from '@material-ui/core/colors';
 import {makeStyles} from '@material-ui/styles';
 import * as UserActions from 'app/auth/store/actions';
 import {useDispatch, useSelector} from 'react-redux';
 import {FuseUtils, FuseAnimateGroup} from '@fuse';
 import {Link} from 'react-router-dom';
-import amber from '@material-ui/core/colors/amber';
 import clsx from 'clsx';
 
 const useStyles = makeStyles({
@@ -92,7 +92,7 @@ function FuseShortcuts(props)
                             )
                         }
                     </ListItemIcon>
-                    <ListItemText className="pl-0" primary={item.title}/>
+                    <ListItemText primary={item.title}/>
                     <IconButton
                         onClick={(ev) => {
                             ev.preventDefault();

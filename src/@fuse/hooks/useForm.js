@@ -7,17 +7,15 @@ function useForm(initialState, onSubmit)
 
     const handleChange = useCallback((event) => {
         event.persist();
-        setForm(
-            form => ({
-                ...form,
-                [event.target.name]: event.target.type === 'checkbox' ? event.target.checked : event.target.value
-            })
-        );
+        setForm(form => _.setIn({...form}, event.target.name, event.target.type === 'checkbox' ? event.target.checked : event.target.value));
     }, []);
 
     const resetForm = useCallback(() => {
-        setForm(initialState);
-    }, [initialState]);
+        if ( !_.isEqual(initialState, form) )
+        {
+            setForm(initialState);
+        }
+    }, [form, initialState]);
 
     const setInForm = useCallback((name, value) => {
         setForm(form => _.setIn(form, name, value));

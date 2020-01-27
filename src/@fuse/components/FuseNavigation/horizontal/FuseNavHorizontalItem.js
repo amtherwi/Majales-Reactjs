@@ -8,6 +8,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import * as Actions from 'app/store/actions';
 import FuseNavBadge from './../FuseNavBadge';
 import {makeStyles} from '@material-ui/styles';
+import {useTranslation} from 'react-i18next';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -28,14 +29,7 @@ const useStyles = makeStyles(theme => ({
             padding: '0 0 0 16px'
         },
         color              : theme.palette.text.primary,
-        textDecoration     : 'none!important',
-        '&.dense'          : {
-            padding            : '8px 12px 8px 12px',
-            minHeight          : 40,
-            '& .list-item-text': {
-                padding: '0 0 0 8px'
-            }
-        }
+        textDecoration     : 'none!important'
     }
 }));
 
@@ -45,7 +39,8 @@ function FuseNavHorizontalItem(props)
     const userRole = useSelector(({auth}) => auth.user.role);
 
     const classes = useStyles(props);
-    const {item, dense} = props;
+    const {item} = props;
+    const {t} = useTranslation('navigation');
 
     if ( !FuseUtils.hasPermission(item.auth, userRole) )
     {
@@ -58,16 +53,22 @@ function FuseNavHorizontalItem(props)
             component={NavLinkAdapter}
             to={item.url}
             activeClassName="active"
-            className={clsx("list-item", classes.root, dense && "dense")}
+            className={clsx("list-item", classes.root)}
             onClick={ev => dispatch(Actions.navbarCloseMobile())}
             exact={item.exact}
         >
             {item.icon && (
                 <Icon className="list-item-icon text-16 flex-shrink-0" color="action">{item.icon}</Icon>
             )}
-            <ListItemText className="list-item-text" primary={item.title} classes={{primary: 'text-14 list-item-text-primary'}}/>
+
+            <ListItemText
+                className="list-item-text"
+                primary={item.translate ? t(item.translate) : item.title}
+                classes={{primary: 'text-14 list-item-text-primary'}}
+            />
+
             {item.badge && (
-                <FuseNavBadge className="ml-8" badge={item.badge}/>
+                <FuseNavBadge className="ltr:ml-8 rtl:mr-8" badge={item.badge}/>
             )}
         </ListItem>
     );

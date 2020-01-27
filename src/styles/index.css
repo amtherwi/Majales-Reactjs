@@ -1,13 +1,11 @@
-@import 'normalize.css';
+@import-normalize ;
 
-* {
-    outline: none !important;
-}
+@import 'tailwind-base.css';
 
 html {
     font-size: 62.5%;
     font-family: Muli, Roboto, Helvetica Neue, Arial, sans-serif;
-    background-color: #262933;
+    background-color: #121212;
 }
 
 body {
@@ -20,6 +18,7 @@ html, body, #root {
     height: 100%;
     overflow: hidden;
     position: relative;
+    margin: 0;
 }
 
 h1, .h1 {
@@ -53,6 +52,10 @@ h6, .h6 {
 
 a[role=button] {
     text-decoration: none;
+}
+
+[role="tooltip"] {
+    z-index: 999;
 }
 
 /* Medium Devices, Desktops Only */

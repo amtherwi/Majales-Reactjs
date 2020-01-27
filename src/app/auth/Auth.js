@@ -1,28 +1,27 @@
 import React, {Component} from 'react';
+import {FuseSplashScreen} from '@fuse';
 import {connect} from 'react-redux';
 import * as userActions from 'app/auth/store/actions';
 import {bindActionCreators} from 'redux';
 import * as Actions from 'app/store/actions';
-import {FuseSplashScreen} from '@fuse';
 import jwtService from 'app/services/jwtService';
 
 class Auth extends Component {
-    /*eslint-disable-next-line no-useless-constructor*/
-    constructor(props)
-    {
-        super(props);
-        this.state = {
-            render: false,
-        };
-    }
-    componentDidMount() {
-        this.jwtCheck();
+
+    state = {
+        waitAuthCheck: true
     }
 
-    jwtCheck = () => {
-        jwtService.on('noAccessToken', () => {
-            this.setState({render : true});
-        });
+    componentDidMount()
+    {
+        return Promise.all([
+            this.jwtCheck()
+        ]).then(() => {
+            this.setState({waitAuthCheck: false})
+        })
+    }
+
+    jwtCheck = () => new Promise(resolve => {
 
         jwtService.on('onAutoLogin', () => {
 
@@ -39,10 +38,11 @@ class Auth extends Component {
                     this.props.setUserData(userobj);
                     this.props.showMessage({message: 'تم تسجيل الدخول الى النظام'});
                     this.setState({render : true});
+                    resolve();
                 })
                 .catch(error => {
                     this.props.showMessage({message: error});
-                    this.setState({render : true});
+
 
                 })
         });
@@ -53,27 +53,18 @@ class Auth extends Component {
                 this.props.showMessage({message});
             }
             this.props.logout();
-            this.setState({render : true});
+
         });
 
         jwtService.init();
 
-    };
+        return Promise.resolve();
+    })
 
 
     render()
     {
-        const {children} = this.props;
-        if(this.state.render){
-            return (
-                <React.Fragment>
-                    {children}
-                </React.Fragment>
-            );
-        }else{
-            return (<FuseSplashScreen></FuseSplashScreen>);
-        }
-
+        return this.state.waitAuthCheck ? <FuseSplashScreen/> : <React.Fragment children={this.props.children}/>;
     }
 }
 

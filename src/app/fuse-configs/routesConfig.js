@@ -6,7 +6,7 @@ import {MajalesRolesAppConfig} from 'app/main/mainpage/MajalesRolesAppConfig';
 import {adminConfigs} from 'app/main/admin/adminConfigs';
 
 const routeConfigs = [
-    ...adminConfigs,    
+    ...adminConfigs,
     LoginConfig,
     MajalesRolesAppConfig
 ];
