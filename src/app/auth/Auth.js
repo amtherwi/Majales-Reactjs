@@ -22,6 +22,9 @@ class Auth extends Component {
     }
 
     jwtCheck = () => new Promise(resolve => {
+        jwtService.on('noAccessToken', () => {
+            resolve();
+        });
 
         jwtService.on('onAutoLogin', () => {
 
@@ -37,7 +40,6 @@ class Auth extends Component {
                     };
                     this.props.setUserData(userobj);
                     this.props.showMessage({message: 'تم تسجيل الدخول الى النظام'});
-                    this.setState({render : true});
                     resolve();
                 })
                 .catch(error => {
